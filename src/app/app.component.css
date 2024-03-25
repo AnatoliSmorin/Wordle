@@ -1,0 +1,9 @@
+
+#wrapper{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--background-color);
+}

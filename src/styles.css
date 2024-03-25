@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+    --line-color: rgb(58,58,60);
+    --background-color: rgb(18,18,19);
+    --text-color: rgb(248,248,248); 
+    --keyboard-color: rgb(129,131,132);
+}
+:host{
+    background-color: var(--background-color);
+}
+body{
+    margin: 0;
+    padding: 0;
+}
