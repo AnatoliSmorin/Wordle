@@ -2,17 +2,21 @@
   position:relative;
 }
 div {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 3px;
   background-color: var(--light-grey);
-  width: fit-content;
   margin: 5px;
+  padding-top: 5px;
+  padding-left: 2px;
+  height: 40px;
+  width: 30px;
 }
 p {
   display: block;
   margin: 0;
   width: 15px;
-  padding: 20px 15px;
   font-family: var(--font-family);
   font-weight: bold;
   font-size: 20px;

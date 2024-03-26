@@ -1,11 +1,14 @@
 :host {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100vw;
   height: 100px;
-  padding: 0 20px;
   background-color: var(--background-color);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: var(--light-grey);
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 div {
   font-family: var(--font-family);
@@ -13,16 +16,27 @@ div {
   font-size: 20px;
   color: var(--text-color);
 }
-#header-buttons {
+.header-side{
   display:flex;
-  align-items: center;
+  align-items: center;  
+  width: 350px;
 }
-/*TODO: centre logo on header*/
-#logo {
-  align-self:center;
+#header-buttons {
+  justify-content: flex-end;
 }
 #header-buttons>div {
   padding: 10px;
+}
+#menu-icon{
+  justify-content: flex-start;
+}
+/*TODO: centre logo on header*/
+#logo {
+  flex-grow: 2;
+  left: 0;
+  right: 0;
+  position: relative;
+  text-align: center;
 }
 #subscribe-button {
   margin-left: 20px;
