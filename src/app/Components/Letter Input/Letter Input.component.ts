@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import { GuessLetter } from '../../Interfaces/Guess Letter';
 
 @Component({
     selector: 'app-letter-input',
@@ -13,5 +14,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class LetterInputComponent 
 {
-    letter:string = "";
+    @Input() letter!:GuessLetter;
 }

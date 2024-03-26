@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-keyboard-button',
@@ -12,8 +12,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KeyboardButtonComponent {
-    onClick(value:string):void
+    @Input() label:string|undefined;
+    onClick():void
     {
-        console.log("click - " + value);
+        console.log("click - " + this.label);
     }
  }

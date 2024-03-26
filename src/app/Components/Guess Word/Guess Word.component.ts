@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { LetterInputComponent } from '../Letter Input/Letter Input.component';
+import { GuessLetter } from '../../Interfaces/Guess Letter';
 
 @Component({
     selector: 'app-guess-word',
@@ -13,4 +14,7 @@ import { LetterInputComponent } from '../Letter Input/Letter Input.component';
     styleUrl: './Guess Word.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GuessWordComponent { }
+export class GuessWordComponent {
+    // @Input() guess!:GuessWord;
+    // letters:string[] = [''];
+ }
