@@ -17,6 +17,10 @@ div {
   display:flex;
   align-items: center;
 }
+/*TODO: centre logo on header*/
+#logo {
+  align-self:center;
+}
 #header-buttons>div {
   padding: 10px;
 }
