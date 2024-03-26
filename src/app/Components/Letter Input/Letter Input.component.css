@@ -4,6 +4,7 @@
 
 .guess-letter {
   display: block;
+  color: var(--text-color);
   border: solid 3px var(--line-color);
   background-color: var(--background-color);
   height: 60px;
