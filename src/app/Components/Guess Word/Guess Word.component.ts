@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { LetterInputComponent } from '../Letter Input/Letter Input.component';
+import { GuessLetterComponent } from '../Guess Letter/Guess Letter.component';
 import { GuessLetter } from '../../Interfaces/Guess Letter';
 import { GuessMatrixComponent } from '../Guess Matrix/Guess Matrix.component';
 import { GuessWord } from '../../Interfaces/Guess Word';
@@ -10,7 +10,7 @@ import { GuessWord } from '../../Interfaces/Guess Word';
     standalone: true,
     imports: [
         CommonModule,
-        LetterInputComponent,
+        GuessLetterComponent,
         GuessMatrixComponent
     ],
     templateUrl: './Guess Word.component.html',
