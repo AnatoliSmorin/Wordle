@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+}
+
+
+/* wrong guess
+app-letter-input
+{
+  background-color: var(--dark-grey);
+}*/
+
+/* right letter
+app-letter-input:nth-child(1){
+  border-color:  var(--right-letter-color);
+  background-color: var(--right-letter-color);
+}*/
+
+/* right position
+app-letter-input:nth-child(2){
+  border-color:  var(--right-position-color);
+  background-color: var(--right-position-color);
+}*/

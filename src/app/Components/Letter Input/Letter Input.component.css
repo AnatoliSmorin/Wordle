@@ -1,16 +1,18 @@
-:root {
-
-}
-
-.guess-letter {
+:host {
   display: block;
-  color: var(--text-color);
-  border: solid 3px var(--line-color);
+  border: solid 3px var(--dark-grey);
   background-color: var(--background-color);
   height: 60px;
   width: 58px;
-  padding: 3px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  position: relative;
+  margin: 3px;
+}
+p {
+  color: var(--text-color);
+  text-align:center;
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 50px;
+  margin: 0;
+  padding: 0;
 }

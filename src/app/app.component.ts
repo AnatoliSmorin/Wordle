@@ -1,18 +1,13 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { LetterInputComponent } from './Components/Letter Input/Letter Input.component';
-import { Directive } from '@angular/core';
-
-@Directive()
-class UserInput {
-}
-
+import { GuessMatrixComponent } from './Components/Guess Matrix/Guess Matrix.component';
+import { KeyboardMatrixComponent } from './Components/Keyboard Matrix/Keyboard Matrix.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, LetterInputComponent],
+  imports: [CommonModule, RouterOutlet, GuessMatrixComponent, KeyboardMatrixComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   host: {

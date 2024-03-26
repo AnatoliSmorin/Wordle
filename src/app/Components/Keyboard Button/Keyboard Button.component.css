@@ -1,0 +1,23 @@
+:host{
+  position:relative;
+}
+div {
+  display: block;
+  border-radius: 3px;
+  background-color: var(--light-grey);
+  width: fit-content;
+  margin: 5px;
+}
+p {
+  display: block;
+  margin: 0;
+  width: 15px;
+  padding: 20px 15px;
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--text-color);
+}
+div:hover{
+  cursor:pointer;
+}
