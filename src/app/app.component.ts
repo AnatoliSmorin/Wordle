@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { GuessMatrixComponent } from './Components/Guess Matrix/Guess Matrix.component';
 import { KeyboardMatrixComponent } from './Components/Keyboard Matrix/Keyboard Matrix.component';
+import { HeaderComponent } from './Components/Header/Header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, GuessMatrixComponent, KeyboardMatrixComponent],
+  imports: [CommonModule, RouterOutlet, GuessMatrixComponent, KeyboardMatrixComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   host: {

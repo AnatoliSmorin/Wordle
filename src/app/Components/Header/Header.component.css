@@ -1,0 +1,34 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100px;
+  padding: 0 20px;
+  background-color: var(--background-color);
+}
+div {
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--text-color);
+}
+#header-buttons {
+  display:flex;
+  align-items: center;
+}
+#header-buttons>div {
+  padding: 10px;
+}
+#subscribe-button {
+  margin-left: 20px;
+  height: 30px;
+  border-radius: 15px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--text-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 0 20px;
+  font-weight: bold;
+}
