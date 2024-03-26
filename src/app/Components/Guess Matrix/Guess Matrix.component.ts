@@ -15,6 +15,6 @@ import { GuessWord } from '../../Interfaces/Guess Word';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GuessMatrixComponent {
-
+    // TODO: create service to hold guessword as observable
     guesses:GuessWord[] = new Array<GuessWord>();
  }
