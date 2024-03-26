@@ -1,3 +1,5 @@
-<div (click)="onClick()">
-    <p>{{dummy}}</p>
+<div [ngStyle]="{'width': largeKey ? '70px' : '30px'}" (click)="onClick()">
+    <p>
+        {{label}}
+    </p>
 </div>
