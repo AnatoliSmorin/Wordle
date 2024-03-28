@@ -19,5 +19,6 @@ import { GuessWord } from '../../Interfaces/Guess Word';
 })
 export class GuessWordComponent {
     @Input() guess!:GuessWord;
-    letters:string[] = ['F', 'A', 'R', 'C', 'E'];
+
+    @Input() indexW!:number;
  }

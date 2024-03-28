@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GuessDataService } from './GuessData.service';
+import { GuessService } from './Guess.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +36,5 @@ export class KeyboardInputService {
     // debug trace - to be deleted
     // console.log("Enter");
   }
-  constructor(private _data:GuessDataService){}
+  constructor(private _data:GuessService){}
 }

@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { GuessMatrixComponent } from './Components/Guess Matrix/Guess Matrix.component';
 import { KeyboardMatrixComponent } from './Components/Keyboard Matrix/Keyboard Matrix.component';
 import { HeaderComponent } from './Components/Header/Header.component';
-import { GuessDataService } from './Services/GuessData.service';
+import { GuessService } from './Services/Guess.service';
 import { KeyboardInputService } from './Services/KeyboardInput.service';
 
 @Component({
