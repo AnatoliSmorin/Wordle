@@ -1,9 +1,10 @@
 
 <!-- TODO create pipe for styles -->
 <div
-    [style.background-color]="guess().at(5 * indexW + indexL)?.value == 3 ? 'var(--right-position-color)' : guess().at(5 * indexW + indexL)?.value == 2 ? 'var(--right-letter-color)' : guess().at(5 * indexW + indexL)?.value == 1 ? 'var(--dark-grey)' : 
-    'var(--background-color)'"
-    [style.border-color]="guess().at(5 * indexW + indexL)?.value == 3 ? 'var(--right-position-color)' : guess().at(5 * indexW + indexL)?.value == 2 ? 'var(--right-letter-color)' : 'var(--dark-grey)'">
+    [class.guess-untested]="guess().at(5 * indexW + indexL)?.value == 0"
+    [class.guess-incorrect]="guess().at(5 * indexW + indexL)?.value == 1"
+    [class.guess-right-letter]="guess().at(5 * indexW + indexL)?.value == 2"
+    [class.guess-right-place]="guess().at(5 * indexW + indexL)?.value == 3">
     <p>
         {{guess().at(5 * indexW + indexL)?.guess}}
     </p>

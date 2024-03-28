@@ -16,3 +16,19 @@ p {
   margin: 0;
   padding: 0;
 }
+.guess-untested {
+  background-color: var(--background-color);
+  border-color: var(--dark-grey);
+}
+.guess-incorrect {
+  background-color: var(--dark-grey);
+  border-color: var(--dark-grey);
+}
+.guess-right-letter {
+  background-color: var(--right-letter-color);
+  border-color: var(--right-letter-color);
+}
+.guess-right-place {
+  background-color: var(--right-position-color);
+  border-color: var(--right-position-color);
+}
