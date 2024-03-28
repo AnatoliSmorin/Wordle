@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, Signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Signal, WritableSignal, signal} from '@angular/core';
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
 import { GuessLetter } from '../../Interfaces/Guess Letter';
@@ -17,9 +17,9 @@ import { GuessWord } from '../../Interfaces/Guess Word';
 })
 export class GuessLetterComponent 
 {
-    @Input() indexL!:number;
-    @Input() indexW!:number;
-    guesses:Signal<string> = this._data.dummy;
+    @Input() indexL:number = 0;
+    @Input() indexW:number = 0;
+    guess:Signal<string[]> = this._guess.data;
 
-    constructor(private _data:GuessService){}
+    constructor(private _guess:GuessService){}
 }

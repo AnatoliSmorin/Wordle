@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
 import { GuessLetterComponent } from '../Guess Letter/Guess Letter.component';
 import { GuessLetter } from '../../Interfaces/Guess Letter';
 import { GuessMatrixComponent } from '../Guess Matrix/Guess Matrix.component';

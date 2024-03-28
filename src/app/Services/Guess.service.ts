@@ -12,23 +12,20 @@ export class GuessService {
   private letterCount:number = 0;
   private wordCount:number = 0;
   
-  private _data!:WritableSignal<string>[][];
-
-  private _dummy:WritableSignal<string> = signal('f');
-  public get dummy():Signal<string>{
-    return this._dummy.asReadonly();
+  private _data!:WritableSignal<string[]>;
+  public get data():Signal<string[]>{
+    return this._data.asReadonly();
   }
-  public set dummy(input:string) {
-    this._dummy = signal(input);
+  public set data(input:string[]){
+    this._data = signal(input);
+    console.log('update');
   }
 
   // on valid letter keypress
   public add(input:string):void{
     if(this.letterCount <= 4)
     {
-      input = input.substring(0,1);
-      this._dummy.set(input);
-      // this.setLetter(input);
+      this.setLetter(input.substring(0,1));
       this.letterCount++;
       console.log("add " + input + "("+ this.letterCount +")");
     }
@@ -82,21 +79,29 @@ export class GuessService {
 
     if(this.letterCount > 0)
     {
-      // this.setLetter('');
+      this.setLetter('');
       console.log("deleted letter ("+ this.letterCount +")");
       this.letterCount--;
     }
   }
 
+  private setLetter(input:string):void{
+    let idx:number = 5 * this.wordCount + this.letterCount;
+    let output:string[] = this._data().map((value, index) => index == idx ? input : value);
+    this._data.set(output);
+    this.logData();
+  }
+  private logData()
+  {
+    console.log(this._data().join(", "));
+  }
+
   constructor(private _answer:AnswerService) 
   {
-    this._data = [];
-    for(let i = 0; i < 6; i++) {
-      let inner:WritableSignal<string>[] = [];
-      for(let j = 0; j < 5; j++) {
-        inner.push(signal(''));      
-      }
-      this._data.push(inner);
+    let output:string[] = [];
+    for(let i = 0; i < 30; i++) {
+      output.push((i % 10).toString());
     }
+    this._data = signal(output);
   }
 }
