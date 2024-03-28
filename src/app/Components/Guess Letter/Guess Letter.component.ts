@@ -19,7 +19,7 @@ export class GuessLetterComponent
 {
     @Input() indexL:number = 0;
     @Input() indexW:number = 0;
-    guess:Signal<string[]> = this._guess.data;
+    guess:Signal<GuessLetter[]> = this._guess.data;
 
     constructor(private _guess:GuessService){}
 }
