@@ -21,7 +21,6 @@ import { KeyboardInputService } from './Services/KeyboardInput.service';
   }
 })
 export class AppComponent {
-
   @HostListener('keyup', ['$event.key'])
   onKeyUp(input:string):void
   {

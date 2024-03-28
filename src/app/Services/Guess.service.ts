@@ -1,9 +1,7 @@
 import { Injectable, WritableSignal, signal, Signal } from '@angular/core';
 import {GuessStatus} from '../Interfaces/Guess Status';
 import { AnswerService } from './Answer.service';
-import { GuessWord } from '../Interfaces/Guess Word';
 import { GuessLetter } from '../Interfaces/Guess Letter';
-import { GuessLetterComponent } from '../Components/Guess Letter/Guess Letter.component';
 
 @Injectable({
   providedIn: 'root'
@@ -106,11 +104,6 @@ export class GuessService {
       }
     });
     this._data.set(output);
-  }
-
-  private logData()
-  {
-    console.log(this._data().join(", "));
   }
 
   private getIndex(word:number, letter:number):number{

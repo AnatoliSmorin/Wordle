@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, Signal, WritableSignal, sign
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
 import { GuessLetter } from '../../Interfaces/Guess Letter';
-import { GuessWord } from '../../Interfaces/Guess Word';
+
 
 @Component({
     selector: 'app-guess-letter',
