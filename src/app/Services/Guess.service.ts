@@ -79,9 +79,9 @@ export class GuessService {
 
     if(this.letterCount > 0)
     {
+      this.letterCount--
       this.setLetter('');
       console.log("deleted letter ("+ this.letterCount +")");
-      this.letterCount--;
     }
   }
 
@@ -100,7 +100,7 @@ export class GuessService {
   {
     let output:string[] = [];
     for(let i = 0; i < 30; i++) {
-      output.push((i % 10).toString());
+      output.push(' ');
     }
     this._data = signal(output);
   }
