@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Signal, WritableSignal, signal} from '@angular/core';
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
@@ -9,7 +9,7 @@ import { GuessWord } from '../../Interfaces/Guess Word';
     selector: 'app-guess-letter',
     standalone: true,
     imports: [
-        CommonModule, GuessWordComponent
+        CommonModule, GuessWordComponent, NgStyle
     ],
     templateUrl: './Guess Letter.component.html',
     styleUrl: './Guess Letter.component.css',

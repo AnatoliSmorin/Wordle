@@ -1,4 +1,14 @@
-<p>
-    {{guess()[5 * indexW + indexL]}}
-</p>
+
+<div
+    [style.background-color]="  indexL == 0 ? 'var(--right-position-color)' : 
+                                indexL == 1 ? 'var(--right-letter-color)' :
+                                indexL == 2 ? 'var(--dark-grey)' : 
+                                              'var(--background-color)'"
+    [style.border-color]="  indexL == 0 ? 'var(--right-position-color)' : 
+                            indexL == 1 ? 'var(--right-letter-color)' :
+                            'var(--dark-grey)'">
+    <p>
+        {{guess()[5 * indexW + indexL]}}
+    </p>
+</div>
 

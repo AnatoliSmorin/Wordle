@@ -18,7 +18,7 @@ export class GuessService {
   }
   public set data(input:string[]){
     this._data = signal(input);
-    console.log('update');
+    // console.log('update');
   }
 
   // on valid letter keypress
@@ -27,7 +27,7 @@ export class GuessService {
     {
       this.setLetter(input.substring(0,1));
       this.letterCount++;
-      console.log("add " + input + "("+ this.letterCount +")");
+      // console.log("add " + input + "("+ this.letterCount +")");
     }
   }
   // on enter key press
@@ -53,18 +53,18 @@ export class GuessService {
 
     if(isValid)
     {
-      console.log("check: success("+ this.letterCount +")")
+      // console.log("check: success("+ this.letterCount +")")
       // win
       this.letterCount = 10;
       return;
     } 
     if(this.wordCount > 5)
     {
-      console.log("check: fail("+ this.letterCount +")")
+      // console.log("check: fail("+ this.letterCount +")")
       // lose
       return;
     }
-    console.log("check: incorrect - next word("+ this.letterCount +")")
+    // console.log("check: incorrect - next word("+ this.letterCount +")")
     // next word
     this.letterCount = 0;
     this.wordCount++;
@@ -81,7 +81,7 @@ export class GuessService {
     {
       this.letterCount--
       this.setLetter('');
-      console.log("deleted letter ("+ this.letterCount +")");
+      // console.log("deleted letter ("+ this.letterCount +")");
     }
   }
 
@@ -89,7 +89,6 @@ export class GuessService {
     let idx:number = 5 * this.wordCount + this.letterCount;
     let output:string[] = this._data().map((value, index) => index == idx ? input : value);
     this._data.set(output);
-    this.logData();
   }
   private logData()
   {
