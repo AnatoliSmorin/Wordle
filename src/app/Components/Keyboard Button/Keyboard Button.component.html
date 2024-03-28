@@ -1,4 +1,6 @@
-<div [ngStyle]="{'width': largeKey ? '70px' : '30px'}" (click)="onClick()">
+<div    [class.key-large]="largeKey"
+        [class.key-pressed]="label|appAlreadyPressed"
+        (click)="onClick()">
     <p>
         {{label}}
     </p>

@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { GuessMatrixComponent } from './Components/Guess Matrix/Guess Matrix.component';
 import { KeyboardMatrixComponent } from './Components/Keyboard Matrix/Keyboard Matrix.component';
 import { HeaderComponent } from './Components/Header/Header.component';
-import { GuessService } from './Services/Guess.service';
 import { KeyboardInputService } from './Services/KeyboardInput.service';
 
 @Component({
@@ -22,18 +21,9 @@ import { KeyboardInputService } from './Services/KeyboardInput.service';
 })
 export class AppComponent {
   @HostListener('keyup', ['$event.key'])
-  onKeyUp(input:string):void
-  {
-    this._input.onKeyUp(input);
-  }
-  onBackspace():void
-  {
-    this._input.onBackspace();
-  }
-  onEnter():void
-  {
-    this._input.onEnter();
-  }
+  onKeyUp = (input:string) => this._input.onKeyUp(input);
+  onBackspace = () => this._input.onBackspace();
+  onEnter = () => this._input.onEnter();
   title = 'Wordle';
   constructor(private _input:KeyboardInputService){}
 }

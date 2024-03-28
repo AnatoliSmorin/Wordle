@@ -9,6 +9,7 @@ div {
   background-color: var(--light-grey);
   margin: 5px;
   height: 40px;
+  width: 30px;
 }
 p {
   text-align: center;
@@ -19,4 +20,10 @@ p {
 }
 div:hover{
   cursor:pointer;
+}
+.key-pressed{
+  background-color: var(--dark-grey);
+}
+.key-large{
+  width: 70px;
 }

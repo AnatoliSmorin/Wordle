@@ -16,7 +16,6 @@ export class GuessService {
   }
   public set data(input:GuessLetter[]){
     this._data = signal(input);
-    // console.log('update');
   }
 
   // on valid letter keypress
@@ -25,7 +24,6 @@ export class GuessService {
     {
       this.setLetter(input.substring(0,1));
       this.letterCount++;
-      // console.log("add " + input + "("+ this.letterCount +")");
     }
   }
 
@@ -41,12 +39,12 @@ export class GuessService {
     {
       this.letterCount--
       this.setLetter('');
-      // console.log("deleted letter ("+ this.letterCount +")");
     }
   }
 
   // on enter key press
   public check():void {
+    console.log("check");
     if(this.letterCount == 10)
     {
       // player already successful - debugging purposes only - remove when not needed
