@@ -5,11 +5,14 @@ import { GuessMatrixComponent } from './Components/Guess Matrix/Guess Matrix.com
 import { KeyboardMatrixComponent } from './Components/Keyboard Matrix/Keyboard Matrix.component';
 import { HeaderComponent } from './Components/Header/Header.component';
 import { KeyboardInputService } from './Services/KeyboardInput.service';
+import { ResultMessageComponent } from './Components/Result Message/Result Message.component';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, GuessMatrixComponent, KeyboardMatrixComponent, HeaderComponent],
+  imports: [CommonModule, RouterOutlet, GuessMatrixComponent, KeyboardMatrixComponent, HeaderComponent,ResultMessageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   host: {
@@ -24,6 +27,9 @@ export class AppComponent {
   onKeyUp = (input:string) => this._input.onKeyUp(input);
   onBackspace = () => this._input.onBackspace();
   onEnter = () => this._input.onEnter();
+  showMessage!:Observable<boolean>;
   title = 'Wordle';
-  constructor(private _input:KeyboardInputService){}
+  constructor(private _input:KeyboardInputService){
+    this.showMessage = new BehaviorSubject<boolean>(false).asObservable();
+  }
 }

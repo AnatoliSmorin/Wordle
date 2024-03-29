@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
     selector: 'app-result-message',
@@ -15,5 +15,8 @@ import { Observable } from 'rxjs';
 export class ResultMessageComponent 
 {
     message!:Observable<string>;
-    visible!:Observable<boolean>;
+
+    constructor(){
+        this.message = new BehaviorSubject('A screaming comes across the sky').asObservable();
+    }
  }
