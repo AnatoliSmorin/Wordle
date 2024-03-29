@@ -1,22 +1,3 @@
 :host {
   display: flex;
 }
-
-
-/* wrong guess
-app-guess-letter
-{
-  background-color: var(--dark-grey);
-}*/
-
-/* right letter
-app-guess-letter:nth-child(1){
-  border-color:  var(--right-letter-color);
-  background-color: var(--right-letter-color);
-}*/
-
-/* right position
-app-guess-letter:nth-child(2){
-  border-color:  var(--right-position-color);
-  background-color: var(--right-position-color);
-}*/

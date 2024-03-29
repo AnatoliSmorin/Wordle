@@ -1,7 +1,7 @@
-import { Injectable, WritableSignal, signal, Signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {GuessStatus} from '../Interfaces/Guess Status';
 import { AnswerService } from './Answer.service';
-import { GuessLetter } from '../Interfaces/Guess Letter';
+import { Guess } from '../Interfaces/Guess';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -10,23 +10,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class GuessService {
   private letterCount:number = 0;
   private wordCount:number = 0;
-  
-  private _data!:WritableSignal<GuessLetter[]>;
-  public get data():Signal<GuessLetter[]>{
-    return this._data.asReadonly();
-  }
-  public set data(input:GuessLetter[]){
-    this._data = signal(input);
-  }
 
-  private _guessedLetters:BehaviorSubject<string[]>  = new BehaviorSubject<string[]>([]);
-  currentGuessedLetters$:Observable<string[]> = this._guessedLetters.asObservable();
+  private _guesses:BehaviorSubject<Guess[]>  = new BehaviorSubject<Guess[]>([]);
+  guesses$:Observable<Guess[]> = this._guesses.asObservable();
 
   // on valid letter keypress
   public add(input:string):void{
     if(this.letterCount <= 4)
     {
-      this.setLetter(input.substring(0,1));
+      this.updateLetter(input);
       this.letterCount++;
     }
   }
@@ -37,7 +29,7 @@ export class GuessService {
     if(this.letterCount > 0 && this.letterCount != 10)
     {
       this.letterCount--;
-      this.setLetter('');
+      this.updateLetter('');
     }
   }
 
@@ -55,17 +47,8 @@ export class GuessService {
       return;
     }
     
-    let guessResults:GuessStatus[] = [];
-    for(let i = 0; i <= 4; i++)
-    {
-      let guessLetter:string = this.data()[this.getIndex(this.wordCount, i)].guess;
-      guessResults.push(this._answer.check(guessLetter, i));
-    }
-
-    this._guessedLetters.next(this._data().map((value) => value.guess));
-    this.setGuessValue(guessResults);
-    
-    if(this.isSuccess(guessResults))
+    this.updateGuessStatus();
+    if(this.isSuccess())
     {
       // win
       this.letterCount = 10;
@@ -81,28 +64,40 @@ export class GuessService {
     this.wordCount++;
   }
 
-  private isSuccess(input:GuessStatus[]):boolean{
-    return input.filter(value => value == GuessStatus.RightLetterRightPlace).length == 5;
+  private isSuccess():boolean{
+    return this._guesses.value.filter(value => 
+      value.Status == GuessStatus.RightLetterRightPlace && 
+      value.Word == this.wordCount).length == 5;
   }
 
-  private setLetter(input:string):void{
-    let idx:number = this.getIndex(this.wordCount, this.letterCount);
-    let updatedValue:GuessLetter = {guess:input,value:GuessStatus.NotGuessed}
-    let output:GuessLetter[] = this._data().map((value, index) => index == idx ? updatedValue : value);
-    this._data.set(output);
+  private updateLetter(input:string):void{
+    let newGuess:Guess = {
+      Index: this.letterCount,
+      Word: this.wordCount,
+      Character: input,
+      Status: GuessStatus.NotGuessed
+    };
+    this._guesses.next(
+      this._guesses.value.map<Guess>((value,index) => 
+        index == this.getIndex(this.wordCount , this.letterCount) ? newGuess : value));
   }
 
-  private setGuessValue(input:GuessStatus[]):void{
-    let wordStart:number = this.getIndex(this.wordCount, 0);
-    let output:GuessLetter[] = this._data().map((value, index) => {
-      if(index >= wordStart && index < wordStart + 5){
-        return {guess: value.guess, value:input[index - wordStart]}
+  private updateGuessStatus():void{
+    let newValues:Guess[] = this._guesses.value.filter(value =>
+      value.Word == this.wordCount
+    ).map<Guess>((value,index) =>
+      {
+        return {
+          Index: value.Index,
+          Word: value.Word,
+          Character: value.Character,
+          Status: this._answer.check(value)
+        }
       }
-      else {
-        return value;
-      }
-    });
-    this._data.set(output);
+    );
+    let precedingWords:Guess[] = this._guesses.value.filter(value => value.Word < this.wordCount);
+    let subsequentWords:Guess[] = this._guesses.value.filter(value => value.Word > this.wordCount);
+    this._guesses.next(precedingWords.concat(newValues).concat(subsequentWords));
   }
 
   private getIndex(word:number, letter:number):number{
@@ -111,13 +106,18 @@ export class GuessService {
 
   constructor(private _answer:AnswerService) 
   {
-    let output:GuessLetter[] = [];
-    for(let i = 0; i < 30; i++) {
-      output.push({
-        guess: ' ',
-        value: GuessStatus.NotGuessed
-      });
+    let output:Guess[] = [];
+    for(let wd = 0; wd < 6; wd++) {
+      for(let idx = 0; idx < 5; idx++)
+      {
+        output.push({
+          Index:idx,
+          Word:wd,
+          Character: '',
+          Status: GuessStatus.NotGuessed
+        });
+      }
     }
-    this._data = signal(output);
+    this._guesses.next(output);
   }
 }

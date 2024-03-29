@@ -1,12 +1,12 @@
 
 <!-- TODO create pipe for styles -->
 <div
-    [class.guess-untested]="guess().at(5 * indexW + indexL)?.value == 0"
-    [class.guess-incorrect]="guess().at(5 * indexW + indexL)?.value == 1"
-    [class.guess-right-letter]="guess().at(5 * indexW + indexL)?.value == 2"
-    [class.guess-right-place]="guess().at(5 * indexW + indexL)?.value == 3">
+    [class.guess-untested]="(guess$|async)?.Status == 0"
+    [class.guess-incorrect]="(guess$|async)?.Status == 1"
+    [class.guess-right-letter]="(guess$|async)?.Status == 2"
+    [class.guess-right-place]="(guess$|async)?.Status == 3">
     <p>
-        {{guess().at(5 * indexW + indexL)?.guess}}
+        {{(guess$|async)?.Character}}
     </p>
 </div>
 

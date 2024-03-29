@@ -2,7 +2,8 @@ import { CommonModule, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Signal, WritableSignal, signal} from '@angular/core';
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
-import { GuessLetter } from '../../Interfaces/Guess Letter';
+import { Guess } from '../../Interfaces/Guess';
+import { Observable, ObservableInput, elementAt, filter, first, map, mergeMap } from 'rxjs';
 
 
 @Component({
@@ -19,7 +20,18 @@ export class GuessLetterComponent
 {
     @Input() indexL:number = 0;
     @Input() indexW:number = 0;
-    guess:Signal<GuessLetter[]> = this._guess.data;
+    dummy$:Observable<Guess[]> = this._data.guesses$.pipe(
+        map(data => data.filter(value =>
+            value.Index == this.indexL &&
+            value.Word == this.indexW
+            ))
+    );
+    guess$:Observable<Guess> = this._data.guesses$.pipe(
+        mergeMap<Guess[],ObservableInput<Guess>>(data => 
+            data.filter(value =>
+                value.Index == this.indexL &&
+                value.Word == this.indexW
+            )));
 
-    constructor(private _guess:GuessService){}
+    constructor(private _data:GuessService){}
 }

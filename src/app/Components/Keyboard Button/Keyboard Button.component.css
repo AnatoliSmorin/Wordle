@@ -21,8 +21,14 @@ p {
 div:hover{
   cursor:pointer;
 }
-.key-pressed{
+.key-wrong{
   background-color: var(--dark-grey);
+}
+.key-right-word{
+  background-color: var(--right-letter-color);
+}
+.key-right-position{
+  background-color: var(--right-position-color);
 }
 .key-large{
   width: 70px;

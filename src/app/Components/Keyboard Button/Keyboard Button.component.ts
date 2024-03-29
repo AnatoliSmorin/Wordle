@@ -5,6 +5,7 @@ import { KeyboardInputService } from '../../Services/KeyboardInput.service';
 import { Observable, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { GuessService } from '../../Services/Guess.service';
+import { GuessStatus } from '../../Interfaces/Guess Status';
 
 @Component({
     selector: 'app-keyboard-button',
@@ -19,7 +20,19 @@ import { GuessService } from '../../Services/Guess.service';
 export class KeyboardButtonComponent {
     @Input() label!:string;
     @Input() largeKey:Boolean = false;
-    isAlreadyGuessed$:Observable<boolean> = this._data.currentGuessedLetters$.pipe(map((data) => data.includes(this.label)));
+    private _keyStatusData:Observable<GuessStatus[]> = this._data.guesses$.pipe(
+        map(data => data.filter(value => value.Character == this.label)),
+        map(data => data.map(value => value.Status))
+    );
+    isRightPosition$:Observable<boolean> = this._keyStatusData.pipe(
+        map(data => data.includes(GuessStatus.RightLetterRightPlace))
+    );
+    isRightLetter$:Observable<boolean> = this._keyStatusData.pipe(
+        map(data => data.includes(GuessStatus.RightLetterWrongPlace))
+    );
+    isWrong$:Observable<boolean> = this._keyStatusData.pipe(
+        map(data => data.includes(GuessStatus.Incorrect))
+    );
 
     onClick():void
     {

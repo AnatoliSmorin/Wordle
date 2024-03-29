@@ -3,5 +3,4 @@ export enum GuessStatus {
     Incorrect = 1,
     RightLetterWrongPlace = 2,
     RightLetterRightPlace = 3
-
  }
