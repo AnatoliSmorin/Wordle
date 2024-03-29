@@ -28,18 +28,16 @@ export class GuessService {
   }
 
   // on backspace or delete
-  public delete():void {
-    // debugging purposes - delete when not needed
-    if(this.letterCount == 10)
-    {
-      return;
-    }
-
-    if(this.letterCount > 0)
+  public delete():string {
+    let output:string|undefined = undefined;
+    // the second condition is just for debugging. no need to keep it.
+    if(this.letterCount > 0 && this.letterCount != 10)
     {
       this.letterCount--
+      output = this._data().at(this.letterCount)?.guess;
       this.setLetter('');
     }
+    return output == undefined ? '' : output;
   }
 
   // on enter key press
