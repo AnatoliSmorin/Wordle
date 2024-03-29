@@ -8,6 +8,7 @@ import { KeyboardInputService } from '../Services/KeyboardInput.service';
 export class AlreadyPressedPipe implements PipeTransform {
 
   transform(value: string): boolean {
+    console.log("press")
     return this._input.guessedLetters().includes(value);
   }
   constructor(private _input:KeyboardInputService){}
