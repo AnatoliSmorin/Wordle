@@ -2,6 +2,7 @@ import { Injectable, WritableSignal, signal, Signal } from '@angular/core';
 import {GuessStatus} from '../Interfaces/Guess Status';
 import { AnswerService } from './Answer.service';
 import { GuessLetter } from '../Interfaces/Guess Letter';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,9 @@ export class GuessService {
     this._data = signal(input);
   }
 
+  private _guessedLetters:BehaviorSubject<string[]>  = new BehaviorSubject<string[]>([]);
+  currentGuessedLetters$:Observable<string[]> = this._guessedLetters.asObservable();
+
   // on valid letter keypress
   public add(input:string):void{
     if(this.letterCount <= 4)
@@ -28,40 +32,39 @@ export class GuessService {
   }
 
   // on backspace or delete
-  public delete():string {
-    let output:string|undefined = undefined;
+  public delete():void {
     // the second condition is just for debugging. no need to keep it.
     if(this.letterCount > 0 && this.letterCount != 10)
     {
-      this.letterCount--
-      output = this._data().at(this.letterCount)?.guess;
+      this.letterCount--;
       this.setLetter('');
     }
-    return output == undefined ? '' : output;
   }
 
   // on enter key press
   public check():void {
-    console.log("check");
     if(this.letterCount == 10)
     {
       // player already successful - debugging purposes only - remove when not needed
       return
     }
-
+    
     if(this.letterCount < 5)
     {
       // word not complete
       return;
     }
-
+    
     let guessResults:GuessStatus[] = [];
     for(let i = 0; i <= 4; i++)
     {
       let guessLetter:string = this.data()[this.getIndex(this.wordCount, i)].guess;
       guessResults.push(this._answer.check(guessLetter, i));
     }
+
+    this._guessedLetters.next(this._data().map((value) => value.guess));
     this.setGuessValue(guessResults);
+    
     if(this.isSuccess(guessResults))
     {
       // win
