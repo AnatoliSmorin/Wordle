@@ -1,5 +1,5 @@
 <div    [class.key-large]="largeKey"
-        [class.key-pressed]=""
+        [class.key-pressed]="isAlreadyGuessed$ | async"
         (click)="onClick()">
     <p>
         {{label}}
