@@ -3,6 +3,8 @@ import {GuessStatus} from '../Interfaces/Guess Status';
 import { AnswerService } from './Answer.service';
 import { Guess } from '../Interfaces/Guess';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { MessageService } from './Message.service';
+import { MessageStatus } from '../Interfaces/Message Status';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,8 @@ export class GuessService {
 
   // on enter key press
   public check():void {
+    console.log("check: " + this.wordCount);
+    this._message.setMessage(MessageStatus.None);
     if(this.letterCount == 10)
     {
       // player already successful - debugging purposes only - remove when not needed
@@ -43,7 +47,10 @@ export class GuessService {
     
     if(this.letterCount < 5)
     {
+      console.log("check - incomplete")
+      this._message.setMessage(MessageStatus.Incomplete);
       // word not complete
+      this._message.show();
       return;
     }
     
@@ -51,12 +58,16 @@ export class GuessService {
     if(this.isSuccess())
     {
       // win
+      this._message.setMessage(MessageStatus.Success,this.wordCount);
       this.letterCount = 10;
+      this._message.show();
       return;
     } 
     if(this.wordCount > 5)
     {
       // lose
+      this._message.setMessage(MessageStatus.Fail);
+      this._message.show();
       return;
     }
     // next word
@@ -104,7 +115,7 @@ export class GuessService {
     return 5 * word + letter;
   }
 
-  constructor(private _answer:AnswerService) 
+  constructor(private _answer:AnswerService, private _message:MessageService) 
   {
     let output:Guess[] = [];
     for(let wd = 0; wd < 6; wd++) {

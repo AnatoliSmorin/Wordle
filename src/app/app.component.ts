@@ -7,7 +7,7 @@ import { HeaderComponent } from './Components/Header/Header.component';
 import { KeyboardInputService } from './Services/KeyboardInput.service';
 import { ResultMessageComponent } from './Components/Result Message/Result Message.component';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NgStyle } from '@angular/common';
+import { MessageService } from './Services/Message.service';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +29,7 @@ export class AppComponent {
   onEnter = () => this._input.onEnter();
   showMessage!:Observable<boolean>;
   title = 'Wordle';
-  constructor(private _input:KeyboardInputService){
-    this.showMessage = new BehaviorSubject<boolean>(false).asObservable();
+  constructor(private _input:KeyboardInputService, private _message:MessageService){
+    this.showMessage = this._message.visible$;
   }
 }
