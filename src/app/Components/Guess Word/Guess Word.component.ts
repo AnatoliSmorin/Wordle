@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
-import { GuessLetterComponent } from '../Guess Letter/Guess Letter.component';
+import { GuessLetterComponent } from '../Guess Tile/Guess Tile.component';
 import { GuessMatrixComponent } from '../Guess Matrix/Guess Matrix.component';
 
 @Component({
@@ -16,5 +16,5 @@ import { GuessMatrixComponent } from '../Guess Matrix/Guess Matrix.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GuessWordComponent {
-    @Input() indexW!:number;
+    @Input() wordIndex!:number;
  }

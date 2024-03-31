@@ -1,36 +1,36 @@
 import { CommonModule, NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, Signal, WritableSignal, signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
 import { Guess } from '../../Interfaces/Guess';
-import { Observable, ObservableInput, elementAt, filter, first, map, mergeMap } from 'rxjs';
+import { Observable, ObservableInput, map, mergeMap } from 'rxjs';
 
 
 @Component({
-    selector: 'app-guess-letter',
+    selector: 'app-guess-tile',
     standalone: true,
     imports: [
         CommonModule, GuessWordComponent, NgStyle
     ],
-    templateUrl: './Guess Letter.component.html',
-    styleUrl: './Guess Letter.component.css',
+    templateUrl: './Guess Tile.component.html',
+    styleUrl: './Guess Tile.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GuessLetterComponent 
 {
-    @Input() indexL:number = 0;
-    @Input() indexW:number = 0;
+    @Input() tileIndex:number = 0;
+    @Input() wordIndex:number = 0;
     dummy$:Observable<Guess[]> = this._data.guesses$.pipe(
         map(data => data.filter(value =>
-            value.Index == this.indexL &&
-            value.Word == this.indexW
+            value.LetterIndex == this.tileIndex &&
+            value.Word == this.wordIndex
             ))
     );
     guess$:Observable<Guess> = this._data.guesses$.pipe(
         mergeMap<Guess[],ObservableInput<Guess>>(data => 
             data.filter(value =>
-                value.Index == this.indexL &&
-                value.Word == this.indexW
+                value.LetterIndex == this.tileIndex &&
+                value.Word == this.wordIndex
             )));
 
     constructor(private _data:GuessService){}

@@ -8,13 +8,13 @@ import { Guess } from '../Interfaces/Guess';
 
 export class AnswerService {
   private answer:string = "DOUBT";
-  check(letter:Guess):GuessStatus
+  check(guess:Guess):GuessStatus
   {
-    if(this.answer.charAt(letter.Index) == letter.Character)
+    if(this.answer.charAt(guess.LetterIndex) == guess.Character)
     {
       return GuessStatus.RightLetterRightPlace;
     }
-    if(this.answer.indexOf(letter.Character) >= 0)
+    if(this.answer.indexOf(guess.Character) >= 0)
     {
       return GuessStatus.RightLetterWrongPlace;
     }
