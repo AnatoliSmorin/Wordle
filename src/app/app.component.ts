@@ -24,7 +24,9 @@ import { MessageService } from './Services/Message.service';
 })
 export class AppComponent {
   @HostListener('keyup', ['$event.key'])
-  onKeyUp = (input:string) => this._input.onKeyUp(input);
+  onKeyUp(input:string){
+      this._input.onKeyUp(input);
+  }
   onBackspace = () => this._input.onBackspace();
   onEnter = () => this._input.onEnter();
   showMessage!:Observable<boolean>;

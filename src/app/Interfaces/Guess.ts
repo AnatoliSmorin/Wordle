@@ -1,4 +1,4 @@
-import {GuessStatus} from './Guess Status';
+import {GuessStatus} from '../Enums/Guess Status';
 
 export interface Guess 
 {

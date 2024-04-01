@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GuessStatus } from '../Interfaces/Guess Status';
+import { GuessStatus } from '../Enums/Guess Status';
 import { Guess } from '../Interfaces/Guess';
 
 @Injectable({
@@ -7,17 +7,20 @@ import { Guess } from '../Interfaces/Guess';
 })
 
 export class AnswerService {
-  private answer:string = "DOUBT";
+  private _answer:string = "DOUBT";
   check(guess:Guess):GuessStatus
   {
-    if(this.answer.charAt(guess.LetterIndex) == guess.Character)
+    if(this._answer.charAt(guess.LetterIndex) == guess.Character)
     {
       return GuessStatus.RightLetterRightPlace;
     }
-    if(this.answer.indexOf(guess.Character) >= 0)
+    if(this._answer.indexOf(guess.Character) >= 0)
     {
       return GuessStatus.RightLetterWrongPlace;
     }
     return GuessStatus.Incorrect;
+  }
+  giveUp():string{
+    return this._answer.toUpperCase();
   }
 }

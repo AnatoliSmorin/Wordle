@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {GuessStatus} from '../Interfaces/Guess Status';
+import {GuessStatus} from '../Enums/Guess Status';
 import { AnswerService } from './Answer.service';
 import { Guess } from '../Interfaces/Guess';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MessageService } from './Message.service';
-import { MessageStatus } from '../Interfaces/Message Status';
+import { MessageStatus } from '../Enums/Message Status';
 
 const WORD_LENGTH: number = 5;
 const NUM_GUESSES: number = 6;
@@ -49,7 +49,6 @@ export class GuessService {
     
     // word not complete
     if(this.letterCount < WORD_LENGTH) {
-      console.log("check - incomplete")
       this._message.setMessage(MessageStatus.Incomplete);
       this._message.show();
       return;

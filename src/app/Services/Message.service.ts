@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MessageStatus } from '../Interfaces/Message Status';
+import { MessageStatus } from '../Enums/Message Status';
+import { AnswerService } from './Answer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +14,17 @@ export class MessageService {
   visible$:Observable<boolean> = this._visible.asObservable();
 
   setMessage(status:MessageStatus, index?:number):void{
-    console.log("setMessage")
     switch(status){
       case MessageStatus.None:{
         this._message.next("");
         break;
       }
       case MessageStatus.Unrecognized:{
-        this._message.next("unrecognized");
+        this._message.next("Not in word list");
         break;
       }
       case MessageStatus.Incomplete:{
-        this._message.next("incomplete");
+        this._message.next("Not enough letters");
         break;
       }
       case MessageStatus.Success:{
@@ -41,39 +41,37 @@ export class MessageService {
     }
   }
   private getFailMessage():string{
-    return "DOUBT";
+    return this._answer.giveUp();
   }
   private getSuccessMessage(index:number):string{
     switch(index){
       case 0:{
-        return "fast";
+        return "Genius";
       }
       case 1:{
-        return "neat";
+        return "Magnificent";
       }
       case 2:{
-        return "average";
+        return "Impressive";
       }
       case 3:{
-        return "friendly";
+        return "Splendid";
       }
       case 4:{
-        return "good";
+        return "Great";
       }
       case 5:{
-        return "good";
+        return "Phew";
       }
     }
     throw new RangeError("Success message error: can only generate a success message for an index between 0 and 5.")
   }
   show():void{
     this._visible.next(true);
-    console.log("show - visible");
     setTimeout(() => {
       this._visible.next(false);
-      console.log("show - hidden")
     }, 1000);
   }
   
-
+  constructor(private _answer:AnswerService){}
 }

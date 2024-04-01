@@ -5,7 +5,7 @@ import { KeyboardInputService } from '../../Services/KeyboardInput.service';
 import { Observable, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { GuessService } from '../../Services/Guess.service';
-import { GuessStatus } from '../../Interfaces/Guess Status';
+import { GuessStatus } from '../../Enums/Guess Status';
 
 @Component({
     selector: 'app-keyboard-button',
