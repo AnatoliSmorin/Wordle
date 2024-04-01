@@ -1,5 +1,8 @@
-<app-guess-tile [wordIndex]="wordIndex" [tileIndex]="0"></app-guess-tile>
-<app-guess-tile [wordIndex]="wordIndex" [tileIndex]="1"></app-guess-tile>
-<app-guess-tile [wordIndex]="wordIndex" [tileIndex]="2"></app-guess-tile>
-<app-guess-tile [wordIndex]="wordIndex" [tileIndex]="3"></app-guess-tile>
-<app-guess-tile [wordIndex]="wordIndex" [tileIndex]="4"></app-guess-tile>
+<div [@wordValidityState]="(validityState$|async)" class="flex-container" >
+    <p>{{validityState$|async}}</p>
+    <app-guess-tile [wordIndex]="wordIndex" [tileIndex]="0"></app-guess-tile>
+    <app-guess-tile [wordIndex]="wordIndex" [tileIndex]="1"></app-guess-tile>
+    <app-guess-tile [wordIndex]="wordIndex" [tileIndex]="2"></app-guess-tile>
+    <app-guess-tile [wordIndex]="wordIndex" [tileIndex]="3"></app-guess-tile>
+    <app-guess-tile [wordIndex]="wordIndex" [tileIndex]="4"></app-guess-tile>
+</div>

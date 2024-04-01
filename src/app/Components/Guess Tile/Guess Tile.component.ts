@@ -4,7 +4,7 @@ import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
 import { Guess } from '../../Interfaces/Guess';
 import { Observable, ObservableInput, filter, map, mergeMap, pairwise } from 'rxjs';
-import { AnimationPlayer, animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
@@ -25,10 +25,13 @@ import { AnimationPlayer, animate, keyframes, state, style, transition, trigger 
                 borderColor: 'var(--border-filled)'
             })),
             transition('empty => full', [
-                animate('50ms', keyframes([
+                // TODO: ensure number is not initially visible
+                // TODO: other tiles should not move - maybe switch to table?
+                animate('200ms', keyframes([
                     style({
                         opacity: '0',
                         borderColor: 'var(--border-filled)',
+                        margin: '3px',
                         offset: 0.01
                     }),
                     style({

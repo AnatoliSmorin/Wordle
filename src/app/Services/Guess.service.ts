@@ -5,9 +5,11 @@ import { Guess } from '../Interfaces/Guess';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MessageService } from './Message.service';
 import { MessageStatus } from '../Enums/Message Status';
+import { WordStatus } from '../Enums/Word Status';
 
 const WORD_LENGTH: number = 5;
 const NUM_GUESSES: number = 6;
+const SUCCESS_VALUE: number = -1;
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,9 @@ export class GuessService {
 
   private _guesses:BehaviorSubject<Guess[]>  = new BehaviorSubject<Guess[]>([]);
   guesses$:Observable<Guess[]> = this._guesses.asObservable();
+
+  private _wordStatus:BehaviorSubject<WordStatus[]> = new BehaviorSubject<WordStatus[]>([]);
+  wordStatus$:Observable<WordStatus[]> = this._wordStatus.asObservable();
 
   // on valid letter keypress
   public add(input:string):void{
@@ -43,16 +48,18 @@ export class GuessService {
     this._message.setMessage(MessageStatus.None);
     
     // player already successful - take no more actions
-    if(this.letterCount < 0) {
+    if(this.letterCount == SUCCESS_VALUE) {
       return;
     } 
     
     // word not complete
     if(this.letterCount < WORD_LENGTH) {
+      this.updateWordStatus(WordStatus.Invalid);
+      // TODO: move message actions from service to component animation
       this._message.setMessage(MessageStatus.Incomplete);
       this._message.show();
       return;
-    }
+    } 
     
     // evaluate
     this.evaluateGuessWord();
@@ -60,18 +67,22 @@ export class GuessService {
     // correct
     if(this.isWordCorrect())
     {
-      this.letterCount = -1;
+      this.letterCount = SUCCESS_VALUE;
+      this.updateWordStatus(WordStatus.Correct);
       this._message.setMessage(MessageStatus.Success,this.wordCount);
       this._message.show();
       return;
     }
 
-    // incorrect, out of guesses
+    // if all the guesses have been used, then display fail message
+    // otherwise, set word status to valid
     if(this.wordCount >= NUM_GUESSES)
     {
       this._message.setMessage(MessageStatus.Fail);
       this._message.show();
       return;
+    } else {
+      this.updateWordStatus(WordStatus.Valid);
     }
     
     // incorrect, go to next guess word
@@ -125,13 +136,27 @@ export class GuessService {
     return WORD_LENGTH * word + letter;
   }
 
+  private updateWordStatus(newValue:WordStatus):void{
+    let output:WordStatus[] = [];
+    let segmentA:WordStatus[] = this._wordStatus.value.slice(0, this.wordCount - 1);
+    let segmentB:WordStatus[] = this._wordStatus.value.slice(this.wordCount + 1, NUM_GUESSES - 1); 
+    if(this.wordCount != 0){
+      output = output.concat(segmentA);
+    }
+    output.push(newValue);
+    if(this.wordCount != NUM_GUESSES - 1){
+      output = output.concat(segmentB);
+    } 
+    this._wordStatus.next(output);
+  }
+
   constructor(private _answer:AnswerService, private _message:MessageService) 
   {
-    let output:Guess[] = [];
+    let initialGuessStatus:Guess[] = [];
     for(let wd = 0; wd < NUM_GUESSES; wd++) {
       for(let idx = 0; idx < WORD_LENGTH; idx++)
       {
-        output.push({
+        initialGuessStatus.push({
           LetterIndex:idx,
           Word:wd,
           Character: '',
@@ -139,6 +164,13 @@ export class GuessService {
         });
       }
     }
-    this._guesses.next(output);
+    this._guesses.next(initialGuessStatus);
+    let initialWordStatus:WordStatus[] = [];
+    for(let gs = 0; gs < NUM_GUESSES; gs++) {
+      initialWordStatus.push(
+        WordStatus.Empty
+      )
+    }
+    this._wordStatus.next(initialWordStatus);
   }
 }
