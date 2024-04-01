@@ -4,8 +4,7 @@ import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
 import { Guess } from '../../Interfaces/Guess';
 import { Observable, ObservableInput, filter, map, mergeMap, pairwise } from 'rxjs';
-import { AnimationService } from '../../Services/Animation.service';
-import { AnimationPlayer, animate, state, style, transition, trigger } from '@angular/animations';
+import { AnimationPlayer, animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
@@ -25,7 +24,29 @@ import { AnimationPlayer, animate, state, style, transition, trigger } from '@an
             state('full', style ({
                 borderColor: 'var(--border-filled)'
             })),
-            transition('open => closed', [
+            transition('empty => full', [
+                animate('50ms', keyframes([
+                    style({
+                        opacity: '0',
+                        borderColor: 'var(--border-filled)',
+                        offset: 0.01
+                    }),
+                    style({
+                        opacity: '1',
+                        height: '62px',
+                        width: '60px',
+                        margin: '1px',
+                        offset: 0.8
+                    }),
+                    style({
+                        height: '60px',
+                        width: '58px',
+                        margin: '3px',
+                        offset: 1
+                    })
+                ]))
+            ]),
+            transition('empty => full',[
                 animate('200ms')
             ])
         ])
@@ -38,19 +59,8 @@ export class GuessLetterComponent
 
     guess$!:Observable<Guess>;
     isLetter$!:Observable<boolean>;
-    
-                 
 
-
-
-    // private _animationAddLetter!:AnimationPlayer;
-    
-    // animationDeleteLetter!:AnimationPlayer;
-    // animationCorrectLetter!:AnimationPlayer;
-    // animationCorrectPosition!:AnimationPlayer;
-    // animationIncorrect!:AnimationPlayer;
-
-    constructor(private _data:GuessService, private _animator:AnimationService, private _elRef:ElementRef){
+    constructor(private _data:GuessService, private _elRef:ElementRef){
         // this._animationAddLetter = this._animator.setAnimationAddLetter(this._elRef.nativeElement);
         this.guess$ = this._data.guesses$.pipe(
             mergeMap<Guess[],ObservableInput<Guess>>(data => 
