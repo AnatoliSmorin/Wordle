@@ -8,6 +8,8 @@ import { AnswerService } from './Answer.service';
 })
 export class MessageService {
 
+  // TODO: replace this with animation in the message component
+
   private _message:BehaviorSubject<string> = new BehaviorSubject<string>('');
   message$:Observable<string> = this._message.asObservable();
   private _visible:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

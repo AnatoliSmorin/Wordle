@@ -24,30 +24,59 @@ import { GuessService } from '../../Services/Guess.service';
             state('empty',style({})),
             state('invalid',style({})),
             state('valid',style({})),
-            transition('* => valid',[
-                animate('2000ms', keyframes([
+            transition('* => valid',[]),
+            transition('* => invalid',[
+                animate('200ms', keyframes([
                     style({
-                        opacity:'0',
-                        backgroundColor: 'blue',
+                        paddingLeft: '10px',
+                        offset: 0.1
+                    }),
+                    style({
+                        paddingRight: '10px',
+                        offset: 0.2
+                    }),
+                    style({
+                        paddingLeft: '10px',
+                        paddingRight: '0px',
+                        offset: 0.3
+                    }),
+                    style({
+                        paddingLeft: '0px',
+                        paddingRight: '10px',
+                        offset: 0.4
+                    }),
+                    style({
+                        paddingLeft: '10px',
+                        paddingRight: '0px',
                         offset: 0.5
                     }),
                     style({
-                        opacity:'0',
-                        backgroundColor: 'blue',
-                        offset: 1})
-                ]))
-            ]),
-            transition('* => invalid',[
-                style({
-                    opacity:'0',
-                    backgroundColor: 'blue',
-                    offset: 0.5
-                }),
-                style({
-                    opacity:'0',
-                    backgroundColor: 'blue',
-                    offset: 1})
-            ])
+                        paddingLeft: '0px',
+                        paddingRight: '10px',
+                        offset: 0.6
+                    }),
+                    style({
+                        paddingLeft: '10px',
+                        paddingRight: '0px',
+                        offset: 0.7
+                    }),
+                    style({
+                        paddingLeft: '0px',
+                        paddingRight: '10px',
+                        offset: 0.8
+                    }),
+                    style({
+                        paddingLeft: '10px',
+                        paddingRight: '0px',
+                        offset: 0.9
+                    }),
+                    style({
+                        paddingLeft: '0px',
+                        paddingRight: '10px',
+                        offset: 1
+                    })
+                ])
+            )])
         ])
     ],
 })

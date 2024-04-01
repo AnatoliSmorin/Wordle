@@ -91,9 +91,10 @@ export class GuessService {
   }
 
   private isWordCorrect():boolean{
-    return this._guesses.value.filter(value => 
+    let correctLetters:number = this._guesses.value.filter(value => 
       value.Status == GuessStatus.RightLetterRightPlace && 
-      value.Word == this.wordCount).length == WORD_LENGTH;
+      value.Word == this.wordCount).length;
+    return correctLetters == WORD_LENGTH;
   }
 
   private updateLetter(input:string):void{
@@ -152,6 +153,7 @@ export class GuessService {
 
   constructor(private _answer:AnswerService, private _message:MessageService) 
   {
+    // create guess array observable
     let initialGuessStatus:Guess[] = [];
     for(let wd = 0; wd < NUM_GUESSES; wd++) {
       for(let idx = 0; idx < WORD_LENGTH; idx++)
@@ -165,6 +167,8 @@ export class GuessService {
       }
     }
     this._guesses.next(initialGuessStatus);
+
+    // create word status observable
     let initialWordStatus:WordStatus[] = [];
     for(let gs = 0; gs < NUM_GUESSES; gs++) {
       initialWordStatus.push(
