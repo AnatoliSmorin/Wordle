@@ -20,11 +20,8 @@ import { GuessService } from '../../Services/Guess.service';
     styleUrl: './Guess Word.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations:[
-        trigger('wordValidityState',[
-            state('empty',style({})),
+        trigger('onInvalidWord',[
             state('invalid',style({})),
-            state('valid',style({})),
-            transition('* => valid',[]),
             transition('* => invalid',[
                 animate('200ms', keyframes([
                     style({

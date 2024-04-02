@@ -3,8 +3,9 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input} f
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
 import { Guess } from '../../Interfaces/Guess';
-import { Observable, ObservableInput, filter, last, map, mergeMap, pairwise } from 'rxjs';
+import { Observable, ObservableInput, every, filter, last, map, mergeMap, pairwise } from 'rxjs';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { GuessStatus } from '../../Enums/Guess Status';
 
 
 @Component({
@@ -42,7 +43,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                     })
                 ]))
             ]),
-            transition('empty => full',[
+            transition('full => empty',[
                 animate('200ms')
             ])
         ]),
@@ -60,7 +61,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                 borderColor: 'var(--right-position-color)'
             })),
             transition('* => incorrect', 
-            animate('200ms',
+            animate('200ms {{delay}}ms',
                 keyframes([
                     style({
                         transform: 'scaleY(0%)',
@@ -78,9 +79,9 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                         offset:1
                     })
             ]))
-        ),
+            ),
             transition('* => wrong-place', 
-                animate('200ms',
+                animate('200ms {{delay}}ms',
                     keyframes([
                         style({
                             transform: 'scaleY(0%)',
@@ -100,7 +101,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                 ]))
             ),
             transition('* => right-place', 
-            animate('200ms',
+            animate('200ms {{delay}}ms',
                 keyframes([
                     style({
                         transform: 'scaleY(0%)',
@@ -119,27 +120,53 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                     })
             ]))
         )
-    ])]
+        ]),
+        trigger('successfulGuess',[
+            transition('false => true', 
+            animate('200ms {{delay}}ms',
+            keyframes([
+                style({
+                    transform: 'translateY(20px)',
+                    offset: 0.25
+                }),
+                style({
+                    transform: 'translateY(0)',
+                    offset: 0.5
+                }),
+                style({
+                    transform: 'translateY(10px)',
+                    offset: 0.75
+                }),
+                style({
+                    transform: 'translateY(0)',
+                    offset: 1
+                })
+            ])))
+        ])
+    ]
 })
 export class GuessLetterComponent
 {
     @Input() tileIndex:number = 0;
     @Input() wordIndex:number = 0;
+    @Input() delay:number = 0;
 
-    guess$!:Observable<Guess>;
+    Guess$!:Observable<Guess>;
     isLetter$!:Observable<boolean>;
+    isSuccess$!:Observable<boolean>;
 
     constructor(private _data:GuessService){
-        this.guess$ = this._data.guesses$.pipe(
+        const rootObs$ = this._data.guesses$.pipe(
             mergeMap<Guess[],ObservableInput<Guess>>(data => 
-                data.filter(value =>
-                    value.LetterIndex == this.tileIndex &&
-                    value.Word == this.wordIndex)));
-        this.isLetter$ = this.guess$
-            .pipe(
+                data.filter(value => value.Word == this.wordIndex)));
+        this.Guess$ = rootObs$.pipe(
+            filter(value => value.LetterIndex == this.tileIndex))
+        this.isLetter$ = this.Guess$.pipe(
                 pairwise(),
                 filter( value => value[0].Character != value[1].Character),
                 map(value => value[1]),
                 map(value => RegExp(/[a-zA-Z]/).test(value.Character)));
+        this.isSuccess$ = rootObs$.pipe(
+            every(value => value.Status == GuessStatus.RightLetterRightPlace));
     }
 }

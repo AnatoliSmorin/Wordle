@@ -1,9 +1,11 @@
 
 <!-- TODO create pipe for styles -->
-<div [@letterAdded]="(isLetter$|async) ? 'full' : 'empty'"
-    [@guessEvaluated]="(guess$|async)?.Status">
+<div 
+    [@letterAdded]="(isLetter$|async) ? 'full' : 'empty'"
+    [@guessEvaluated]="{value:(Guess$|async)?.Status, params:{delay:delay}}"
+    [@successfulGuess]="{value:(isSuccess$|async), params:{delay:delay}}">
     <p>
-        {{(guess$|async)?.Character}}
+        {{(Guess$|async)?.Character}}
     </p>
 </div>
 
