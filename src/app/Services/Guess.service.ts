@@ -46,8 +46,6 @@ export class GuessService {
   // on enter key press
   public check():void {
     this._message.setMessage(MessageStatus.None);
-    
-    console.log("check: wordcount " + this.wordCount + " - " + this._wordStatus.value[this.wordCount]);
 
     // player already successful - take no more actions
     if(this.letterCount == SUCCESS_VALUE) {
