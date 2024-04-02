@@ -1,9 +1,4 @@
-<div    [class.key-large]="largeKey"
-        [class.key-wrong]="isWrong$ | async"
-        [class.key-right-position]="isRightPosition$ | async"
-        [class.key-right-word]="isRightLetter$ | async"
-
-        (click)="onClick()">
+<div [class.key-large]="largeKey" [@guessEvaluated]="(keyState$|async)" (click)="onClick()">
     <p>
         {{label}}
     </p>

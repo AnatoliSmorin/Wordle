@@ -1,9 +1,9 @@
 import { CommonModule, NgStyle } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
 import { Guess } from '../../Interfaces/Guess';
-import { Observable, ObservableInput, every, filter, last, map, mergeMap, pairwise } from 'rxjs';
+import { Observable, ObservableInput, every, filter, map, mergeMap, pairwise, tap } from 'rxjs';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { GuessStatus } from '../../Enums/Guess Status';
 
@@ -122,11 +122,12 @@ import { GuessStatus } from '../../Enums/Guess Status';
         )
         ]),
         trigger('successfulGuess',[
-            transition('false => true', 
-            animate('200ms {{delay}}ms',
+            state('success',style({})),
+            transition('* => success', 
+            animate('500ms {{delay}}ms',
             keyframes([
                 style({
-                    transform: 'translateY(20px)',
+                    transform: 'translateY(-20px)',
                     offset: 0.25
                 }),
                 style({
@@ -134,7 +135,7 @@ import { GuessStatus } from '../../Enums/Guess Status';
                     offset: 0.5
                 }),
                 style({
-                    transform: 'translateY(10px)',
+                    transform: 'translateY(-10px)',
                     offset: 0.75
                 }),
                 style({
@@ -158,7 +159,8 @@ export class GuessLetterComponent
     constructor(private _data:GuessService){
         const rootObs$ = this._data.guesses$.pipe(
             mergeMap<Guess[],ObservableInput<Guess>>(data => 
-                data.filter(value => value.Word == this.wordIndex)));
+                data.filter(value => value.Word == this.wordIndex))
+                );
         this.Guess$ = rootObs$.pipe(
             filter(value => value.LetterIndex == this.tileIndex))
         this.isLetter$ = this.Guess$.pipe(
@@ -166,7 +168,10 @@ export class GuessLetterComponent
                 filter( value => value[0].Character != value[1].Character),
                 map(value => value[1]),
                 map(value => RegExp(/[a-zA-Z]/).test(value.Character)));
-        this.isSuccess$ = rootObs$.pipe(
-            every(value => value.Status == GuessStatus.RightLetterRightPlace));
+        this.isSuccess$ = this._data.guesses$.pipe(
+            map(data => data.filter(value => 
+                value.Word == this.wordIndex && value.Status == GuessStatus.RightLetterRightPlace)),
+            map(data => data.length == 5)
+            );
     }
 }

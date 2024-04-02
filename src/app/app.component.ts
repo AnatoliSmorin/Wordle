@@ -6,8 +6,11 @@ import { KeyboardMatrixComponent } from './Components/Keyboard Matrix/Keyboard M
 import { HeaderComponent } from './Components/Header/Header.component';
 import { KeyboardInputService } from './Services/KeyboardInput.service';
 import { ResultMessageComponent } from './Components/Result Message/Result Message.component';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { MessageService } from './Services/Message.service';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
+import { GuessService } from './Services/Guess.service';
+import { WordStatus } from './Enums/Word Status';
 
 @Component({
   selector: 'app-root',
@@ -20,18 +23,42 @@ import { MessageService } from './Services/Message.service';
     '(document: keyup.delete)': 'onBackspace()',
     '(document: keyup.enter)': 'onEnter()',
     '(document: keyup)': 'onKeyUp($event.key)',
-  }
+  },animations:[
+    trigger('onGuessCheck',[
+        state('invalid', style({opacity:'0'})),
+        state('correct', style({opacity:'1'})),
+        transition('* => invalid', [
+          animate('1s', keyframes([
+            style({
+              opacity:'1',
+              offset:0.01
+            }),
+            style({
+              opacity:'1',
+              offset:0.99
+            })
+          ]))
+        ]),
+        transition('* => valid', [])
+    ])
+  ]
 })
 export class AppComponent {
   @HostListener('keyup', ['$event.key'])
+
+  showMessage$:Observable<WordStatus>;
+  title = 'Wordle';
+
   onKeyUp(input:string){
       this._input.onKeyUp(input);
   }
   onBackspace = () => this._input.onBackspace();
   onEnter = () => this._input.onEnter();
-  showMessage!:Observable<boolean>;
-  title = 'Wordle';
-  constructor(private _input:KeyboardInputService, private _message:MessageService){
-    this.showMessage = this._message.visible$;
+  
+  constructor(private _input:KeyboardInputService, private _message:MessageService, private _guesses:GuessService){
+    this.showMessage$ = this._guesses.wordStatus$.pipe(
+      map(data => data.filter(value => value != WordStatus.Empty && value != WordStatus.Valid)),
+      map(data => data[data.length -1])
+    );
   }
 }

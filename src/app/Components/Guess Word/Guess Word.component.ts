@@ -67,7 +67,7 @@ import { GuessService } from '../../Services/Guess.service';
                 ])
             )])
         ])
-    ],
+    ]
 })
 export class GuessWordComponent {
     @Input() wordIndex!:number;
@@ -79,10 +79,5 @@ export class GuessWordComponent {
         filter(value => value[0] != value[1]),
         map(value => value[1]));
 
-    /**
-     *
-     */
-    constructor(private _service:GuessService) {
-        
-     }
+    constructor(private _service:GuessService) { }
  }

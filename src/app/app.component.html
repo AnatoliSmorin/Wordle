@@ -2,6 +2,6 @@
 <div id="wrapper" class="flex-container flex-direction-column">
     <app-guess-matrix></app-guess-matrix>
     <app-keyboard-matrix></app-keyboard-matrix>
-    <app-result-message [ngStyle]="{'display': (showMessage|async) ? 'block' : 'none'}"></app-result-message>
+    <app-result-message [@onGuessCheck]="(showMessage$|async)"></app-result-message>
 </div>
     
