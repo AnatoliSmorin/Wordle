@@ -1,34 +1,20 @@
 div {
   display: block;
-  border: solid 3px var(--dark-grey);
+  border: solid 2px var(--dark-grey);
   background-color: var(--background-color);
-  height: 60px;
-  width: 58px;
+  height: 48px;
+  width: 48px;
   position: relative;
-  margin: 3px;
 }
 p {
   color: var(--text-color);
   text-align:center;
   font-family: var(--font-family);
   font-weight: bold;
-  font-size: 50px;
+  font-size: 2rem;
   margin: 0;
-  padding: 0;
-}
-.guess-untested {
-  background-color: var(--background-color);
-  border-color: var(--dark-grey);
-}
-.guess-incorrect {
-  background-color: var(--dark-grey);
-  border-color: var(--dark-grey);
-}
-.guess-right-letter {
-  background-color: var(--right-letter-color);
-  border-color: var(--right-letter-color);
-}
-.guess-right-place {
-  background-color: var(--right-position-color);
-  border-color: var(--right-position-color);
+  padding-top: 5px;
+  height:100%;
+  align-items: center;
+  justify-content: center;
 }

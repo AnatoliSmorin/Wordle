@@ -47,6 +47,8 @@ export class GuessService {
   public check():void {
     this._message.setMessage(MessageStatus.None);
     
+    console.log("check: wordcount " + this.wordCount + " - " + this._wordStatus.value[this.wordCount]);
+
     // player already successful - take no more actions
     if(this.letterCount == SUCCESS_VALUE) {
       return;
@@ -98,6 +100,9 @@ export class GuessService {
   }
 
   private updateLetter(input:string):void{
+    // clear word validity
+    this.updateWordStatus(WordStatus.Empty);
+
     // create new Guess object
     let newGuess:Guess = {
       LetterIndex: this.letterCount,
@@ -139,7 +144,7 @@ export class GuessService {
 
   private updateWordStatus(newValue:WordStatus):void{
     let output:WordStatus[] = [];
-    let segmentA:WordStatus[] = this._wordStatus.value.slice(0, this.wordCount - 1);
+    let segmentA:WordStatus[] = this._wordStatus.value.slice(0, this.wordCount);
     let segmentB:WordStatus[] = this._wordStatus.value.slice(this.wordCount + 1, NUM_GUESSES - 1); 
     if(this.wordCount != 0){
       output = output.concat(segmentA);

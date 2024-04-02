@@ -25,9 +25,6 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                 borderColor: 'var(--border-filled)'
             })),
             transition('empty => full', [
-                // TODO: ensure number is not initially visible
-                // TODO: other tiles should not move - maybe switch to table?
-                // TODO: will flex-grow solve our issue?
                 animate('200ms', keyframes([
                     style({
                         opacity: '0',
@@ -63,7 +60,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                 borderColor: 'var(--right-position-color)'
             })),
             transition('* => incorrect', 
-            animate('500ms',
+            animate('200ms',
                 keyframes([
                     style({
                         transform: 'scaleY(0%)',
@@ -83,7 +80,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
             ]))
         ),
             transition('* => wrong-place', 
-                animate('500ms',
+                animate('200ms',
                     keyframes([
                         style({
                             transform: 'scaleY(0%)',
@@ -103,7 +100,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                 ]))
             ),
             transition('* => right-place', 
-            animate('500ms',
+            animate('200ms',
                 keyframes([
                     style({
                         transform: 'scaleY(0%)',
@@ -132,8 +129,7 @@ export class GuessLetterComponent
     guess$!:Observable<Guess>;
     isLetter$!:Observable<boolean>;
 
-    constructor(private _data:GuessService, private _elRef:ElementRef){
-        // this._animationAddLetter = this._animator.setAnimationAddLetter(this._elRef.nativeElement);
+    constructor(private _data:GuessService){
         this.guess$ = this._data.guesses$.pipe(
             mergeMap<Guess[],ObservableInput<Guess>>(data => 
                 data.filter(value =>

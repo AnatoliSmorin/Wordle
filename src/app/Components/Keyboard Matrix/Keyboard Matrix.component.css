@@ -2,11 +2,14 @@
   display: block;
   display: flex;
   flex-direction: column;
-  margin: 20px;
 }
 
 .keyboard-row {
   display: flex;
   justify-content: center;
-  width: 600px;
+  width: 484px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  margin-left: auto;
+  margin-right:auto;
 }

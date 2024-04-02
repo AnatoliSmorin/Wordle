@@ -80,8 +80,8 @@ export class GuessWordComponent {
             data.filter((value, index) => index == this.wordIndex)),
         pairwise(),
         filter(value => value[0] != value[1]),
-        tap(value => console.log(value[0] + " - " + value[1])),
-        map(value => value[1]));
+        map(value => value[1]),
+        tap(value => console.log(value)));
 
     /**
      *

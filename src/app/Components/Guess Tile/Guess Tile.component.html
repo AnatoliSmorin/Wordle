@@ -1,6 +1,5 @@
 
 <!-- TODO create pipe for styles -->
-<!-- TODO replace classes for guess styles => animation -->
 <div [@letterAdded]="(isLetter$|async) ? 'full' : 'empty'"
     [@guessEvaluated]="(guess$|async)?.Status">
     <p>
