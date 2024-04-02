@@ -1,7 +1,7 @@
 export enum MessageStatus {
-    None = 0,
-    Unrecognized = 1,
-    Incomplete = 2,
-    Success = 3,
-    Fail = 4
+    None = 'none',
+    Unrecognized = 'unrecognized',
+    Incomplete = 'incomplete',
+    Success = 'success',
+    Fail = 'fail'
 }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'app-guess-matrix',
@@ -13,4 +14,6 @@ import { GuessWordComponent } from '../Guess Word/Guess Word.component';
     styleUrl: './Guess Matrix.component.css',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GuessMatrixComponent {}
+export class GuessMatrixComponent {
+    numRows:number = 6;
+}

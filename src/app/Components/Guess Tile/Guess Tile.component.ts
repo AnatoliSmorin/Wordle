@@ -27,6 +27,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
             transition('empty => full', [
                 // TODO: ensure number is not initially visible
                 // TODO: other tiles should not move - maybe switch to table?
+                // TODO: will flex-grow solve our issue?
                 animate('200ms', keyframes([
                     style({
                         opacity: '0',
