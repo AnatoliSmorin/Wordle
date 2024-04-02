@@ -28,51 +28,43 @@ import { GuessService } from '../../Services/Guess.service';
             transition('* => invalid',[
                 animate('200ms', keyframes([
                     style({
-                        paddingLeft: '10px',
+                        transform: 'translateX(10px)',
                         offset: 0.1
                     }),
                     style({
-                        paddingRight: '10px',
+                        transform: 'translateX(-10px)',
                         offset: 0.2
                     }),
                     style({
-                        paddingLeft: '10px',
-                        paddingRight: '0px',
+                        transform: 'translateX(10px)',
                         offset: 0.3
                     }),
                     style({
-                        paddingLeft: '0px',
-                        paddingRight: '10px',
+                        transform: 'translateX(-10px)',
                         offset: 0.4
                     }),
                     style({
-                        paddingLeft: '10px',
-                        paddingRight: '0px',
+                        transform: 'translateX(10px)',
                         offset: 0.5
                     }),
                     style({
-                        paddingLeft: '0px',
-                        paddingRight: '10px',
+                        transform: 'translateX(-10px)',
                         offset: 0.6
                     }),
                     style({
-                        paddingLeft: '10px',
-                        paddingRight: '0px',
+                        transform: 'translateX(10px)',
                         offset: 0.7
                     }),
                     style({
-                        paddingLeft: '0px',
-                        paddingRight: '10px',
+                        transform: 'translateX(-10px)',
                         offset: 0.8
                     }),
                     style({
-                        paddingLeft: '10px',
-                        paddingRight: '0px',
+                        transform: 'translateX(10px)',
                         offset: 0.9
                     }),
                     style({
-                        paddingLeft: '0px',
-                        paddingRight: '10px',
+                        transform: 'translateX(-10px)',
                         offset: 1
                     })
                 ])
@@ -89,7 +81,7 @@ export class GuessWordComponent {
         pairwise(),
         filter(value => value[0] != value[1]),
         tap(value => console.log(value[0] + " - " + value[1])),
-        map(value => value[1] == 0 ? 'empty' : ( value[1] == 1 ? 'invalid' : 'valid')));
+        map(value => value[1]));
 
     /**
      *

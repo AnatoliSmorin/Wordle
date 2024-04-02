@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input} f
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
 import { GuessService } from '../../Services/Guess.service';
 import { Guess } from '../../Interfaces/Guess';
-import { Observable, ObservableInput, filter, map, mergeMap, pairwise } from 'rxjs';
+import { Observable, ObservableInput, filter, last, map, mergeMap, pairwise } from 'rxjs';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 
 
@@ -32,20 +32,15 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
                     style({
                         opacity: '0',
                         borderColor: 'var(--border-filled)',
-                        margin: '3px',
                         offset: 0.01
                     }),
                     style({
                         opacity: '1',
-                        height: '62px',
-                        width: '60px',
-                        margin: '1px',
+                        transform: 'scale(1.1,1.1)',
                         offset: 0.8
                     }),
                     style({
-                        height: '60px',
-                        width: '58px',
-                        margin: '3px',
+                        transform: 'scale(1,1)',
                         offset: 1
                     })
                 ]))
@@ -53,8 +48,81 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
             transition('empty => full',[
                 animate('200ms')
             ])
-        ])
-    ]
+        ]),
+        trigger('guessEvaluated',[
+            state('incorrect', style({
+                    backgroundColor: 'var(--dark-grey)',
+                    borderColor: 'var(--dark-grey)'
+            })),
+            state('wrong-place', style({
+                backgroundColor: 'var(--right-letter-color)',
+                borderColor: 'var(--right-letter-color)'
+            })),
+            state('right-place', style({
+                backgroundColor: 'var(--right-position-color)',
+                borderColor: 'var(--right-position-color)'
+            })),
+            transition('* => incorrect', 
+            animate('500ms',
+                keyframes([
+                    style({
+                        transform: 'scaleY(0%)',
+                        backgroundColor: 'var(--background-color)',
+                        borderColor: 'var(--dark-grey)',
+                        offset:0.5
+                    }),
+                    style({
+                        backgroundColor: 'var(--dark-grey)',
+                        borderColor: 'var(--dark-grey)',
+                        offset:0.51
+                    }),
+                    style({
+                        transform: 'scaleY(100%)',
+                        offset:1
+                    })
+            ]))
+        ),
+            transition('* => wrong-place', 
+                animate('500ms',
+                    keyframes([
+                        style({
+                            transform: 'scaleY(0%)',
+                            backgroundColor: 'var(--background-color)',
+                            borderColor: 'var(--dark-grey)',
+                            offset:0.5
+                        }),
+                        style({
+                            backgroundColor: 'var(--right-letter-color)',
+                            borderColor: 'var(--right-letter-color)',
+                            offset:0.51
+                        }),
+                        style({
+                            transform: 'scaleY(100%)',
+                            offset:1
+                        })
+                ]))
+            ),
+            transition('* => right-place', 
+            animate('500ms',
+                keyframes([
+                    style({
+                        transform: 'scaleY(0%)',
+                        backgroundColor: 'var(--background-color)',
+                        borderColor: 'var(--dark-grey)',
+                        offset:0.5
+                    }),
+                    style({
+                        backgroundColor: 'var(--right-position-color)',
+                        borderColor: 'var(--right-position-color)',
+                        offset:0.51
+                    }),
+                    style({
+                        transform: 'scaleY(100%)',
+                        offset:1
+                    })
+            ]))
+        )
+    ])]
 })
 export class GuessLetterComponent
 {
