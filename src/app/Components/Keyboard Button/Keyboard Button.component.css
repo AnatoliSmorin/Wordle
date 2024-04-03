@@ -9,18 +9,26 @@ div {
   background-color: var(--light-grey);
   margin-right: 6px;
   height: 58px;
-  width: 43px;
 }
 p {
   text-align: center;
   font-family: var(--font-family);
   font-weight: bold;
-  font-size: 1.25em;
   color: var(--text-color);
 }
-div:hover{
-  cursor:pointer;
+.key-large>p{
+  font-size: 0.75em;
+}
+.key-small>p{
+  font-size: 1.25em;
 }
 .key-large{
-  width: 70px;
+  min-width: 40px;
+  max-width: 70px;
+  width: 13vw;
+}
+.key-small{
+  min-width: 40px;
+  max-width: 44px;
+  width: 8.5vw;
 }

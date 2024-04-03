@@ -1,9 +1,12 @@
 :host {
   display: block;
   padding: 10px;
+  margin: calc(50vh - 48vw - 119px) 0;
 }
 div {
-  width: 280px;
-  height: 340px;
+  max-width: 330px;
+  max-height: 400px;
+  height: calc(96vw + 25px);
+  width: calc(80vw + 20px);
   justify-content: space-between;
 }

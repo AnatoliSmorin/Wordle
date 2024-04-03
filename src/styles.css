@@ -8,9 +8,6 @@
     --right-position-color: rgb(83,141,78);
     --font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-:host{
-    background-color: var(--background-color);
-}
 body{
     margin: 0;
     padding: 0;
@@ -22,3 +19,6 @@ body{
 .flex-direction-column{
     flex-direction: column;
 }
+.clickable {
+    cursor: pointer;
+  }

@@ -1,4 +1,4 @@
-<div [class.key-large]="largeKey" [@guessEvaluated]="(keyState$|async)" (click)="onClick()">
+<div class="clickable" [class.key-large]="largeKey" [class.key-small]="!largeKey" [@guessEvaluated]="(keyState$|async)" (click)="onClick()">
     <p>
         {{label}}
     </p>
