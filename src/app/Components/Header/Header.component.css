@@ -29,6 +29,8 @@ div {
 }
 #menu-icon{
   justify-content: flex-start;
+  height: 30px;
+  fill: white;
 }
 /*TODO: centre logo on header*/
 #logo {

@@ -1,0 +1,16 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <rect stroke-width="18" id="svg_1" 
+    [style.height]="strHeight" [style.width]="strWidth" 
+    y="183" x="9" [style.stroke]="fillColor" fill="none"/>
+
+  <rect stroke-width="18" id="svg_2" 
+    [style.height]="strHeight" [style.width]="strWidth" 
+    y="9" x="173" [style.stroke]="fillColor" fill="none"/>
+
+  <rect stroke-width="18" id="svg_3" 
+    [style.height]="strHeight" [style.width]="strWidth"
+    y="256" x="337" [style.stroke]="fillColor" fill="none"/>
+ </g>
+</svg>
