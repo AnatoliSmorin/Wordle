@@ -12,9 +12,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionIcon {
-  @Input() fillColor:string = "#f8f8f8"
-  @Input() height:number = 388;
-  @Input() width:number = 388;
-
-  strHeight:string = this.height + 'px';
-  strWidth:string = this.width + 'px'; }
+  @Input() fillColor:string = "var(--text-color)";
+}

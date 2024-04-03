@@ -12,9 +12,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RankingsIcon {
-  @Input() fillColor:string = "#f8f8f8"
-  @Input() height:number = 512;
-  @Input() width:number = 512;
-
-  strHeight:string = this.height + 'px';
-  strWidth:string = this.width + 'px'; }
+  @Input() fillColor:string = "var(--text-color)";
+}
