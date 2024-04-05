@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { GuessStatus } from '../Enums/Guess Status';
 import { Guess } from '../Interfaces/Guess';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+const URL:string = "http://localhost:5202/api/Values/solution?length=5"
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AnswerService {
-  private _answer:string = "DOUBT";
+  private _answer!:string;
   check(guess:Guess):GuessStatus
   {
     if(this._answer.charAt(guess.LetterIndex) == guess.Character)
@@ -21,6 +25,10 @@ export class AnswerService {
     return GuessStatus.Incorrect;
   }
   giveUp():string{
-    return this._answer.toUpperCase();
+    return this._answer;
+  }
+  constructor(private _client:HttpClient){
+    let dummy:Observable<string> = this._client.get<string>(URL);
+    dummy.subscribe(value => this._answer = value);
   }
 }
