@@ -1,11 +1,9 @@
 <app-header></app-header>
 <div id="wrapper" class="flex-container flex-direction-column">
-    <div id="guess-container" class="content-container">
+    <div id="guess-container">
         <app-guess-matrix></app-guess-matrix>
     </div>
-    <div id="keyboard-container" class="content-container">
-        <app-keyboard-matrix></app-keyboard-matrix>
-    </div>
+    <app-keyboard-matrix></app-keyboard-matrix>
     <app-result-message [@onGuessCheck]="(showMessage$|async)"></app-result-message>
 </div>
     

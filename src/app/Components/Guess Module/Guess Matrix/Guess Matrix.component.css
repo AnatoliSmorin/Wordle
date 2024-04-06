@@ -10,4 +10,5 @@ div {
   height: calc(96vw + 25px);
   width: calc(80vw + 20px);
   justify-content: space-between;
+  align-items: flex-start;
 }

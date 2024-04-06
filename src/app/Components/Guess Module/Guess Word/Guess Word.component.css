@@ -1,5 +1,7 @@
 div{
     max-width:330px;
+    min-width: 65.55px;
+    min-height: 52.5px;
     width: calc(80vw + 20px);
     justify-content: space-between;
 }
