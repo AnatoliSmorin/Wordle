@@ -7,6 +7,8 @@
     --right-letter-color: rgb(181,159,59);
     --right-position-color: rgb(83,141,78);
     --font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --keyboard-height: 186px;
+    --header-height:40px;
 }
 body{
     margin: 0;
@@ -25,4 +27,9 @@ body{
 @font-face{
     font-family: Bevan-Regular;
     src: url("/assets/fonts/Bevan-Regular.ttf") format("truetype");
+}
+@media(min-width:415px){
+    :root{
+        --header-height:65px;
+    }
 }

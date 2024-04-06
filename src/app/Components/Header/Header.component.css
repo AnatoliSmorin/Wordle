@@ -1,6 +1,6 @@
 :host {
   width: calc(100vw - 32px);
-  height: 40px;
+  height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,14 +57,12 @@
   }
   #header-buttons {
     justify-content: flex-end;
-    flex-grow: 1;
   }
   #logo {
     font-size: 24px;
+    text-align: center;
   }
-}
-@media (min-width: 415px){
-  :host{
-    height: 65px;
+  #header-menu {
+    justify-content: space-between;
   }
 }
