@@ -25,13 +25,13 @@ import { Guess } from '../../../Interfaces/Guess';
             state('wrong-place', style({backgroundColor: 'var(--right-letter-color)'})),
             state('right-place', style({backgroundColor: 'var(--right-position-color)'})),
             transition('* => incorrect',[
-                animate('10ms 2000ms')
+                animate('10ms 800ms')
             ]),
             transition('* => wrong-place',[
-                animate('10ms 2000ms')
+                animate('10ms 800ms')
             ]),
             transition('* => right-place',[
-                animate('10ms 2000ms')
+                animate('10ms 800ms')
             ])
         ])
     ],
