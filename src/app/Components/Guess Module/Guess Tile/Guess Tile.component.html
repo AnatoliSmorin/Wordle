@@ -1,11 +1,10 @@
 
-<!-- TODO create pipe for styles -->
 <div 
     [@letterAdded]="(isLetter$|async) ? 'full' : 'empty'"
     [@guessEvaluated]="{value:(Guess$|async)?.Status, params:{delay:delay}}"
     [@successfulGuess]="{value:(isSuccess$|async) ? 'success' : 'none', params:{delay:(delay + 1000)}}">
-    <p>
-        {{(Guess$|async)?.Character}}
-    </p>
+    
+    {{(Guess$|async)?.Character}}
+
 </div>
 

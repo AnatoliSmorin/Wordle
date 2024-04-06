@@ -1,7 +1,6 @@
-div{
-    max-width:330px;
-    min-width: 65.55px;
-    min-height: 52.5px;
-    width: calc(80vw + 20px);
-    justify-content: space-between;
+:host{
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
+    width:100%;
 }

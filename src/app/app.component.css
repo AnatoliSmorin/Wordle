@@ -4,7 +4,6 @@
     padding: 0;
     position: relative;
     height: calc(100vh - var(--header-height));
-    width: 100%;
     background-color: var(--background-color);
     align-items: center;
     justify-content: space-around;
@@ -18,4 +17,6 @@
 }
 #game-container {
     flex-direction: column;
+    /* max-width: 500px;
+    min-width: 450px; */
 }

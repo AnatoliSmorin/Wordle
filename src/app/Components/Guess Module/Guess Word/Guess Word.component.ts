@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { GuessLetterComponent } from '../Guess Tile/Guess Tile.component';
 import { GuessMatrixComponent } from '../Guess Matrix/Guess Matrix.component';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
@@ -67,11 +67,15 @@ import { GuessService } from '../../../Services/Guess.service';
                 ])
             )])
         ])
-    ]
+    ],
 })
 export class GuessWordComponent {
     @Input() wordIndex!:number;
-
+    @HostBinding('@onInvalidWord') get onInvalidWord():string{
+        let output:string ="";
+        this.validityState$.subscribe(value => output = value);
+        return output;
+    }
     validityState$:Observable<string> = this._service.wordStatus$.pipe(
         mergeMap<WordStatus[],ObservableInput<WordStatus>>(data =>
             data.filter((value, index) => index == this.wordIndex)),

@@ -2,21 +2,13 @@ div {
   display: block;
   border: solid 2px var(--dark-grey);
   background-color: var(--background-color);
+  font: bold 2rem var(--font-family);
+  /* line-height must be equal to div height */
   height: 15vw;
+  line-height: 15vw;
   width: 15vw;
-  max-height: 58px;
-  max-width: 58px;
   position: relative;
-}
-p {
   color: var(--text-color);
   text-align:center;
-  font-family: var(--font-family);
-  font-weight: bold;
-  font-size: 2rem;
-  margin: 0;
-  padding-top: 5px;
-  height:100%;
   align-items: center;
-  justify-content: center;
 }

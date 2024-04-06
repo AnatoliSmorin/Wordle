@@ -8,9 +8,13 @@
     --right-position-color: rgb(83,141,78);
     --font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     --keyboard-height: 186px;
-    --header-height:40px;
+    --header-height: 40px;
+    width: 100vw;
+    height: 100vh;
 }
 body{
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
