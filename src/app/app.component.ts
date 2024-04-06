@@ -1,8 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { GuessMatrixComponent } from './Components/Guess Matrix/Guess Matrix.component';
-import { KeyboardMatrixComponent } from './Components/Keyboard Matrix/Keyboard Matrix.component';
+import { GuessMatrixComponent } from './Components/Guess Module/Guess Matrix/Guess Matrix.component';
+import { KeyboardMatrixComponent } from './Components/Keyboard Module/Keyboard Matrix/Keyboard Matrix.component';
 import { HeaderComponent } from './Components/Header/Header.component';
 import { KeyboardInputService } from './Services/KeyboardInput.service';
 import { ResultMessageComponent } from './Components/Result Message/Result Message.component';

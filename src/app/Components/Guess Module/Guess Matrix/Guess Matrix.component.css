@@ -1,11 +1,12 @@
 :host {
   display: block;
   padding: 10px;
-  margin: calc(50vh - 48vw - 119px) 0;
 }
 div {
   max-width: 330px;
+  min-width: 106px;
   max-height: 400px;
+  min-height: 360px;
   height: calc(96vw + 25px);
   width: calc(80vw + 20px);
   justify-content: space-between;

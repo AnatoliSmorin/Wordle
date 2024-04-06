@@ -4,8 +4,8 @@ import { GuessLetterComponent } from '../Guess Tile/Guess Tile.component';
 import { GuessMatrixComponent } from '../Guess Matrix/Guess Matrix.component';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { Observable, ObservableInput, filter, map, mergeMap, pairwise, tap } from 'rxjs';
-import { WordStatus } from '../../Enums/Word Status'
-import { GuessService } from '../../Services/Guess.service';
+import { WordStatus } from '../../../Enums/Word Status'
+import { GuessService } from '../../../Services/Guess.service';
 
 
 @Component({

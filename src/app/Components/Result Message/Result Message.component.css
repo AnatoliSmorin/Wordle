@@ -10,6 +10,7 @@ div {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10pt;
   font-weight: 700;
+  /* TODO: font:10pt 700 Arial,Helvetica,sans-serif; */
   border-radius: 5px;
   height:fit-content;
   width:fit-content;

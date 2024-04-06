@@ -21,4 +21,8 @@ body{
 }
 .clickable {
     cursor: pointer;
-  }
+}
+@font-face{
+    font-family: Bevan-Regular;
+    src: url("/assets/fonts/Bevan-Regular.ttf") format("truetype");
+}

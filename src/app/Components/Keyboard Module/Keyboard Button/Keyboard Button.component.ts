@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { KeyboardMatrixComponent } from '../Keyboard Matrix/Keyboard Matrix.component';
-import { KeyboardInputService } from '../../Services/KeyboardInput.service';
+import { KeyboardInputService } from '../../../Services/KeyboardInput.service';
 import { Observable, ObservableInput, map, mergeMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { GuessService } from '../../Services/Guess.service';
-import { GuessStatus } from '../../Enums/Guess Status';
+import { GuessService } from '../../../Services/Guess.service';
+import { GuessStatus } from '../../../Enums/Guess Status';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Guess } from '../../Interfaces/Guess';
+import { Guess } from '../../../Interfaces/Guess';
 
 @Component({
     selector: 'app-keyboard-button',

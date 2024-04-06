@@ -1,11 +1,11 @@
 import { CommonModule, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { GuessWordComponent } from '../Guess Word/Guess Word.component';
-import { GuessService } from '../../Services/Guess.service';
-import { Guess } from '../../Interfaces/Guess';
+import { GuessService } from '../../../Services/Guess.service';
+import { Guess } from '../../../Interfaces/Guess';
 import { Observable, ObservableInput, every, filter, map, mergeMap, pairwise, tap } from 'rxjs';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
-import { GuessStatus } from '../../Enums/Guess Status';
+import { GuessStatus } from '../../../Enums/Guess Status';
 
 
 @Component({

@@ -28,7 +28,7 @@ export class AnswerService {
     return this._answer;
   }
   constructor(private _client:HttpClient){
-    let dummy:Observable<string> = this._client.get<string>(URL);
-    dummy.subscribe(value => this._answer = value);
+    // this._client.get<string>(URL).subscribe(value => this._answer = value);
+    this._answer = "DOUBT";
   }
 }
