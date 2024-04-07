@@ -1,9 +1,13 @@
 :host{
-  padding: 10px;
+  padding-top:1px;
   height: var(--matrix-height);
   width: var(--matrix-width);
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   grid-gap: 5px;
   box-sizing: border-box;
+}
+:before{
+  display:inline-block;
+  padding-bottom:100%
 }

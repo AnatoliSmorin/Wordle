@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, ViewChild, ViewChildren, viewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, HostListener, ViewChild, ViewChildren, viewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { GuessMatrixComponent } from './Components/Guess Module/Guess Matrix/Guess Matrix.component';
@@ -6,7 +6,7 @@ import { KeyboardMatrixComponent } from './Components/Keyboard Module/Keyboard M
 import { HeaderComponent } from './Components/Header/Header.component';
 import { KeyboardInputService } from './Services/KeyboardInput.service';
 import { ResultMessageComponent } from './Components/Result Message/Result Message.component';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { MessageService } from './Services/Message.service';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { GuessService } from './Services/Guess.service';
@@ -46,7 +46,7 @@ import { GridStyleService } from './Services/Grid Style.service';
     ])
   ]
 })
-export class AppComponent {
+export class AppComponent  {
   @ViewChild('gameContainer',{read: ElementRef}) container!:ElementRef;
   @HostListener('keyup', ['$event.key'])
   @HostListener('resize',['$event'])
@@ -62,7 +62,9 @@ export class AppComponent {
   getScreenSize(){
     this._grid.containerHeight(this.container.nativeElement.clientHeight);
   }
-  overflowToggle$:Observable<string> = this._grid.trackSize$.pipe(map(v => v > 30 ? 'hidden' : 'unset'));
+  overflowToggle$:Observable<string> = this._grid.trackSize$.pipe(
+    map(v => v > 60 ? 'hidden' : 'unset')
+  );
   
   constructor(private _input:KeyboardInputService, private _message:MessageService, private _guesses:GuessService, private _grid:GridStyleService){
     this.showMessage$ = this._guesses.wordStatus$.pipe(

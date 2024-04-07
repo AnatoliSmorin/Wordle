@@ -1,11 +1,11 @@
 div {
+  height: calc(100% - 3px);
   width: calc(100% - 3px);
-  height:calc(100% - 3px);
   display: inline-block;
   border: solid 2px var(--dark-grey);
   background-color: var(--background-color);
   font: bold 2rem var(--font-family);
   color: var(--text-color);
   text-align:center;
-  vertical-align: middle;
 }
+

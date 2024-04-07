@@ -45,7 +45,6 @@ export class GuessService {
 
   // on enter key press
   public check():void {
-    console.log('check');
     this._message.setMessage(MessageStatus.None);
 
     // player already successful - take no more actions
@@ -101,7 +100,6 @@ export class GuessService {
   private updateLetter(input:string):void{
     // clear word validity
     this.updateWordStatus(WordStatus.Empty);
-    console.log('update-guess')
     // create new Guess object
     let newGuess:Guess = {
       LetterIndex: this.letterCount,
