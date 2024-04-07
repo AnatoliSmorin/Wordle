@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild, ViewChildren, viewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { GuessMatrixComponent } from './Components/Guess Module/Guess Matrix/Guess Matrix.component';
@@ -11,6 +11,7 @@ import { MessageService } from './Services/Message.service';
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { GuessService } from './Services/Guess.service';
 import { WordStatus } from './Enums/Word Status';
+import { GridStyleService } from './Services/Grid Style.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,9 @@ import { WordStatus } from './Enums/Word Status';
     '(document: keyup.delete)': 'onBackspace()',
     '(document: keyup.enter)': 'onEnter()',
     '(document: keyup)': 'onKeyUp($event.key)',
-  },animations:[
+    '(window:resize)': 'getScreenSize()'
+  },
+  animations:[
     trigger('onGuessCheck',[
         state('invalid', style({opacity:'0'})),
         state('correct', style({opacity:'1'})),
@@ -44,9 +47,11 @@ import { WordStatus } from './Enums/Word Status';
   ]
 })
 export class AppComponent {
+  @ViewChild('gameContainer',{read: ElementRef}) container!:ElementRef;
   @HostListener('keyup', ['$event.key'])
+  @HostListener('resize',['$event'])
 
-  showMessage$:Observable<WordStatus>;
+  showMessage$!:Observable<WordStatus>;
   title = 'Wordle';
 
   onKeyUp(input:string){
@@ -54,8 +59,12 @@ export class AppComponent {
   }
   onBackspace = () => this._input.onBackspace();
   onEnter = () => this._input.onEnter();
+  getScreenSize(){
+    this._grid.containerHeight(this.container.nativeElement.clientHeight);
+  }
+  overflowToggle$:Observable<string> = this._grid.trackSize$.pipe(map(v => v > 30 ? 'hidden' : 'unset'));
   
-  constructor(private _input:KeyboardInputService, private _message:MessageService, private _guesses:GuessService){
+  constructor(private _input:KeyboardInputService, private _message:MessageService, private _guesses:GuessService, private _grid:GridStyleService){
     this.showMessage$ = this._guesses.wordStatus$.pipe(
       map(data => data.filter(value => value != WordStatus.Empty && value != WordStatus.Valid)),
       map(data => data[data.length -1])

@@ -1,14 +1,11 @@
 div {
-  display: block;
+  width: calc(100% - 3px);
+  height:calc(100% - 3px);
+  display: inline-block;
   border: solid 2px var(--dark-grey);
   background-color: var(--background-color);
   font: bold 2rem var(--font-family);
-  /* line-height must be equal to div height */
-  height: 15vw;
-  line-height: 15vw;
-  width: 15vw;
-  position: relative;
   color: var(--text-color);
   text-align:center;
-  align-items: center;
+  vertical-align: middle;
 }

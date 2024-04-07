@@ -9,8 +9,10 @@
     --font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     --keyboard-height: 186px;
     --header-height: 40px;
-    width: 100vw;
-    height: 100vh;
+    --matrix-height:340px;
+    --matrix-width:280px;
+    --game-max-width:500px;
+    /* --matrix-height: calc(100vh - var(--header-height) - var(--keyboard-height) - 20px); */
 }
 body{
     width: 100vw;
@@ -18,6 +20,7 @@ body{
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
+    overflow-y: unset;
 }
 .flex-container{
     display:flex;

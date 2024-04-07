@@ -1,12 +1,9 @@
-div {
-  max-width: 330px;
-  min-width: 106px;
-  max-height: 400px;
-  min-height: 360px;
-  height: calc(100vw - var(--header-height) - var(--keyboard-height));
-  width: 100%;
+:host{
+  padding: 10px;
+  height: var(--matrix-height);
+  width: var(--matrix-width);
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   grid-gap: 5px;
-  padding: 10px;
+  box-sizing: border-box;
 }
