@@ -56,9 +56,9 @@ export class GuessService {
     if(this.letterCount < WORD_LENGTH) {
       this.updateWordStatus(WordStatus.Invalid);
       // TODO: move message actions from service to component animation
+      // TODO: consolidate wordstatus and messagestatus enums
       this._message.setMessage(MessageStatus.Incomplete);
-      this._message.show();
-      return;
+
     } 
 
     // word doesn't exist 
@@ -67,16 +67,20 @@ export class GuessService {
     console.log(thisword + " is valid? " + (dummy ? "YES" : "NO"));
     if(!dummy) {
       this.updateWordStatus(WordStatus.Invalid);
-      // TODO: move message actions from service to component animation
       this._message.setMessage(MessageStatus.Unrecognized);
-      this._message.show();
-      return;
+      
     } 
 
-    // evaluate
+    // if word isn't valid, show message and return
+    if(this._wordStatus.value[this.wordCount] == WordStatus.Invalid){
+      this._message.show();
+      return;
+    }
+
+    // if word is valid, evaluate
     this.evaluateGuessWord();
 
-    // correct
+    // word is correct
     if(this.isWordCorrect())
     {
       this.letterCount = SUCCESS_VALUE;
@@ -110,7 +114,7 @@ export class GuessService {
   }
 
   private updateLetter(input:string):void{
-    // clear word validity
+    // reset word validity state
     this.updateWordStatus(WordStatus.Empty);
     // create new Guess object
     let newGuess:Guess = {

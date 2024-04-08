@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GuessStatus } from '../Enums/Guess Status';
 import { Guess } from '../Interfaces/Guess';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const URLRoot:string = "http://localhost:5202/api/Values"
@@ -45,6 +45,13 @@ export class AnswerService {
     return 'DOUBT';
   }
   constructor(private _client:HttpClient){
-    this._client.get<string>(URLRoot + SolutionURL + '5').subscribe(value => this._answer = value);
+    const headerData = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    this._client.get('http://localhost:5202/api/Values/solution?length=5',{responseType: 'text'}).subscribe(
+      value => 
+    {
+      console.log(value)
+      this._answer = value
+    }
+    );
   }
 }
