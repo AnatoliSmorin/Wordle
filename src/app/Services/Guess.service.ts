@@ -60,7 +60,19 @@ export class GuessService {
       this._message.show();
       return;
     } 
-    
+
+    // word doesn't exist 
+    let thisword:string = this._guesses.value.filter(v => v.Word == this.wordCount).map(v => v.Character).join();
+    let dummy:boolean = !this._answer.wordIsValid(thisword);
+    console.log(thisword + " is valid? " + (dummy ? "YES" : "NO"));
+    if(!dummy) {
+      this.updateWordStatus(WordStatus.Invalid);
+      // TODO: move message actions from service to component animation
+      this._message.setMessage(MessageStatus.Unrecognized);
+      this._message.show();
+      return;
+    } 
+
     // evaluate
     this.evaluateGuessWord();
 

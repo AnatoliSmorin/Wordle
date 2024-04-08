@@ -87,13 +87,11 @@ export class GuessMatrixComponent {
         else { return output; }
     }
     ValidityState$:Observable<string[]> = this._service.wordStatus$.pipe(
-            // tap(v => console.log(v)),
             // mergeMap<WordStatus[],ObservableInput<WordStatus>>(data =>
             //     data.filter((value, index) => index == input)),
             pairwise(),
             filter(value => value[0] != value[1]),
-            map(value => value[1]),
-            tap(v => console.log(v))
+            map(value => value[1])
         );
     constructor(private _grid:GridStyleService, private _service:GuessService){}
 }
